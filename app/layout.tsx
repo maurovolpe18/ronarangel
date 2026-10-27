@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rona Rangel — Portafolio Editorial",
     description: "Diseño, fotografía y dirección creativa con propósito.",
-    images: ["/images/hero-desktop.png"]
+    images: ["/images/hero-desktop.jpg"]
   }
 };
 

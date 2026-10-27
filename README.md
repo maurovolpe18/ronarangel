@@ -1,8 +1,10 @@
 # Rona Rangel — portafolio editorial
 
 Sitio de una sola página construido con Next.js, React, TypeScript y Tailwind
-CSS. La ruta principal se prerenderiza como contenido estático y las imágenes
-se sirven mediante la optimización integrada de Next.js.
+CSS. Se exporta como sitio estático (`output: "export"`) y se publica en
+Cloudflare. Las imágenes de `public/images` se sirven tal cual, sin
+optimización en tiempo de ejecución, así que deben subirse ya comprimidas
+(JPG para fotos opacas, WebP si necesitan transparencia).
 
 ## Desarrollo
 
@@ -24,6 +26,19 @@ npm run build
 ```
 
 También se pueden ejecutar las tres verificaciones con `npm run check`.
+
+## Despliegue en Cloudflare
+
+`npm run build` genera el sitio completo en `out/`. `wrangler.jsonc` lo publica
+como assets estáticos de un Worker y usa `404.html` para las rutas inexistentes.
+
+- **Workers (Workers Builds):** comando de build `npm run build`, comando de
+  deploy `npx wrangler deploy`.
+- **Pages:** preset "None", comando de build `npm run build`, directorio de
+  salida `out`.
+
+La versión de Node se fija en `.node-version` (Next.js 16 requiere Node 20.9 o
+posterior).
 
 ## Estructura
 

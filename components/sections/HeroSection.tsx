@@ -8,7 +8,7 @@ export function HeroSection() {
     >
       <div className="absolute inset-0 hidden md:block">
         <Image
-          src="/images/hero-desktop.png"
+          src="/images/hero-desktop.jpg"
           alt="Rona Rangel"
           fill
           priority
@@ -19,7 +19,7 @@ export function HeroSection() {
       </div>
       <div className="absolute inset-0 md:hidden">
         <Image
-          src="/images/hero-mobile.png"
+          src="/images/hero-mobile.jpg"
           alt="Rona Rangel"
           fill
           priority

@@ -4,7 +4,7 @@ export function ImpactSection() {
   return (
     <section className="relative h-[80vh] overflow-hidden bg-ink md:h-screen">
       <Image
-        src="/images/impact-background.png"
+        src="/images/impact-background.jpg"
         alt=""
         fill
         sizes="100vw"

@@ -7,7 +7,7 @@ export function AboutSection() {
         <div className="col-span-12 md:col-start-1 md:col-span-6 md:mt-8 lg:col-start-1 lg:col-span-5">
           <div className="relative">
             <Image
-              src="/images/portrait.png"
+              src="/images/portrait.webp"
               alt="Retrato de Rona Rangel"
               width={1536}
               height={1920}

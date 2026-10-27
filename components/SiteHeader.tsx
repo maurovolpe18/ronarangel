@@ -74,10 +74,10 @@ export function SiteHeader() {
           onClick={closeMenu}
         >
           <Image
-            src="/images/brand/logo.png"
+            src="/images/brand/logo.webp"
             alt="Rona Rangel"
-            width={1920}
-            height={1080}
+            width={680}
+            height={383}
             priority
             sizes="(min-width: 1024px) 170px, (min-width: 768px) 140px, 100px"
             className="h-14 w-auto transition-[filter] duration-500 md:h-20 lg:h-24"
