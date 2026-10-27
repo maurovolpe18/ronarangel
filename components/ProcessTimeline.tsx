@@ -1,0 +1,67 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { processSteps } from "@/data/content";
+
+export function ProcessTimeline() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <div className="absolute left-0 right-0 top-12 hidden h-px bg-cream/15 md:block" />
+      <div
+        className="absolute left-0 top-12 hidden h-px origin-left bg-cream/70 transition-transform duration-300 ease-out md:block"
+        style={{
+          width: "100%",
+          transform: visible ? "scaleX(1)" : "scaleX(0)"
+        }}
+      />
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+        {processSteps.map((step) => (
+          <div
+            key={step.number}
+            className={`${step.offset} transition-all duration-700 ease-out`}
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(24px)",
+              transitionDelay: step.delay
+            }}
+          >
+            <div
+              className="-mt-[5px] mb-10 hidden h-3 w-3 rounded-full bg-cream transition-transform duration-500 md:block"
+              style={{ transform: visible ? "scale(1)" : "scale(0)" }}
+            />
+            <div
+              className="editorial-eyebrow mb-3"
+              style={{ color: "var(--beige)" }}
+            >
+              Etapa {step.number}
+            </div>
+            <h3 className="display-mag mb-5 text-4xl text-cream md:text-5xl">
+              {step.title}
+            </h3>
+            <p className="max-w-[280px] text-sm font-light leading-relaxed text-cream/75">
+              {step.copy}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

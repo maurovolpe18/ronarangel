@@ -1,0 +1,24 @@
+# Dependencies
+/node_modules/
+
+# Next.js
+/.next/
+/out/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Local tooling and browser profiles
+/.chrome-*/
+/.tmp-*
+/.claude/
+
+# Environment files
+.env*
+!.env.example
+
+# Logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db

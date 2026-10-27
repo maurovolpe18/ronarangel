@@ -1,0 +1,66 @@
+# Rona Rangel — portafolio editorial
+
+Sitio de una sola página construido con Next.js, React, TypeScript y Tailwind
+CSS. La ruta principal se prerenderiza como contenido estático y las imágenes
+se sirven mediante la optimización integrada de Next.js.
+
+## Desarrollo
+
+Requisitos: Node.js 20 o posterior y npm.
+
+```bash
+npm install
+npm run dev
+```
+
+El sitio queda disponible en `http://localhost:3000`.
+
+## Verificación
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
+
+También se pueden ejecutar las tres verificaciones con `npm run check`.
+
+## Estructura
+
+```text
+app/                  Ruta, layout y estilos globales
+components/           Componentes interactivos compartidos
+components/sections/  Secciones de la página principal
+components/legacy/    Versiones anteriores conservadas temporalmente
+data/                 Contenido estructurado del sitio
+public/images/        Imágenes utilizadas en producción
+assets/reference/     Imágenes fuente conservadas, no publicadas
+```
+
+Los tokens visuales y las clases editoriales están definidos en
+`app/globals.css`. Tailwind genera las utilidades desde los componentes mediante
+PostCSS; no se versionan hojas compiladas.
+
+## Contenido
+
+Los proyectos, testimonios, servicios, navegación y pasos del proceso se editan
+en `data/content.ts`. Los textos propios de cada sección viven en su componente
+correspondiente.
+
+La portada muestra cuatro proyectos destacados y permite desplegar el resto en
+una cuadrícula compacta. La versión anterior, que mostraba todos los proyectos
+en formato grande, se conserva temporalmente en
+`components/legacy/PortfolioSectionLegacy.tsx`. Para restaurarla basta con
+reemplazar el import de `PortfolioSection` en `app/page.tsx` por:
+
+```ts
+import {
+  PortfolioSectionLegacy as PortfolioSection
+} from "@/components/legacy/PortfolioSectionLegacy";
+```
+
+## Formulario
+
+El comportamiento existente del formulario se mantiene deliberadamente sin
+cambios. Antes de publicar una versión que reciba consultas reales, deberá
+conectarse a un servicio o endpoint de correo.
