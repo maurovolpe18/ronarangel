@@ -1,0 +1,17 @@
+# Cabeceras de Cloudflare (Workers Assets / Pages). Sin esto, todo se revalida en
+# cada visita.
+
+# Archivos con hash en el nombre: nunca cambian, se guardan un año.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imágenes: el nombre no lleva hash, así que se cachean un día y se sirven
+# mientras se revalidan en segundo plano. Al reemplazar una foto se ve en un día
+# como máximo.
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Para todo el sitio.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

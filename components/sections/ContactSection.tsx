@@ -1,10 +1,24 @@
 import { ContactForm } from "@/app/ContactForm";
 
+const ROMAN_NUMERALS: [number, string][] = [
+  [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"],
+  [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]
+];
+
+function toRoman(value: number) {
+  let rest = value;
+  return ROMAN_NUMERALS.reduce((result, [amount, symbol]) => {
+    const times = Math.floor(rest / amount);
+    rest -= times * amount;
+    return result + symbol.repeat(times);
+  }, "");
+}
+
 export function ContactSection() {
   return (
     <section
       id="contacto"
-      className="relative bg-ink px-6 py-28 text-cream md:px-12 md:py-40"
+      className="relative bg-ink px-6 py-20 text-cream md:px-12 md:py-28"
     >
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-12 md:col-span-6">
@@ -15,7 +29,7 @@ export function ContactSection() {
             Si conectas
             <br />
             con lo que{" "}
-            <span className="italic-accent" style={{ color: "#b54d25" }}>
+            <span className="italic-accent text-rust">
               viste
             </span>
             ,
@@ -24,7 +38,7 @@ export function ContactSection() {
             <br />
             juntos.
           </h2>
-          <div className="mt-12 max-w-md space-y-5">
+          <div className="mt-10 max-w-md space-y-5">
             <a
               href="https://wa.me/5491156925330?text=Hola%2C%20quiero%20agendar%20una%20llamada"
               target="_blank"
@@ -60,8 +74,11 @@ export function ContactSection() {
         </div>
         <ContactForm />
       </div>
-      <footer className="editorial-eyebrow mt-24 flex flex-col gap-4 border-t border-cream/15 pt-8 text-cream/50 md:mt-32 md:flex-row md:items-center md:justify-between">
-        <span>© MMXXV · Rona Rangel · Todos los derechos reservados</span>
+      <footer className="editorial-eyebrow mt-16 flex flex-col gap-4 border-t border-cream/15 pt-8 text-cream/60 md:mt-20 md:flex-row md:items-center md:justify-between">
+        <span>
+          © {toRoman(new Date().getFullYear())} · Rona Rangel · Todos los
+          derechos reservados
+        </span>
         <span>Diseño &amp; Dirección Editorial — RR Studio</span>
       </footer>
     </section>

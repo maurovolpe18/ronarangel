@@ -1,5 +1,9 @@
-import { FocusAccordion } from "@/components/FocusAccordion";
+import { FocusAccordion } from "@/components/legacy/FocusAccordion";
 
+/**
+ * Sección «Mi enfoque» (Diseño, Estrategia, Fotografía). Se fusionó con el
+ * portafolio en `PortfolioSection`; se conserva para poder restaurarla.
+ */
 export function FocusSection() {
   return (
     <section

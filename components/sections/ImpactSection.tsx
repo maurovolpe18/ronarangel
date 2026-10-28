@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function ImpactSection() {
   return (
-    <section className="relative h-[80vh] overflow-hidden bg-ink md:h-screen">
+    <section className="relative h-[70vh] overflow-hidden bg-ink md:h-[80vh]">
       <Image
         src="/images/impact-background.jpg"
         alt=""

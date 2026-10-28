@@ -24,9 +24,9 @@ export function ProcessTimeline() {
 
   return (
     <div ref={ref} className="relative">
-      <div className="absolute left-0 right-0 top-12 hidden h-px bg-cream/15 md:block" />
+      <div className="absolute left-0 right-0 top-0 hidden h-px bg-cream/15 md:block" />
       <div
-        className="absolute left-0 top-12 hidden h-px origin-left bg-cream/70 transition-transform duration-300 ease-out md:block"
+        className="absolute left-0 top-0 hidden h-px origin-left bg-cream/70 transition-transform duration-700 ease-out motion-reduce:transition-none md:block"
         style={{
           width: "100%",
           transform: visible ? "scaleX(1)" : "scaleX(0)"
@@ -36,7 +36,7 @@ export function ProcessTimeline() {
         {processSteps.map((step) => (
           <div
             key={step.number}
-            className={`${step.offset} transition-all duration-700 ease-out`}
+            className="transition-all duration-700 ease-out motion-reduce:transition-none"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(24px)",
@@ -44,21 +44,20 @@ export function ProcessTimeline() {
             }}
           >
             <div
-              className="-mt-[5px] mb-10 hidden h-3 w-3 rounded-full bg-cream transition-transform duration-500 md:block"
+              className="-mt-[5px] mb-10 hidden h-3 w-3 rounded-full bg-cream transition-transform duration-500 motion-reduce:transition-none md:block"
               style={{ transform: visible ? "scale(1)" : "scale(0)" }}
             />
-            <div
-              className="editorial-eyebrow mb-3"
-              style={{ color: "var(--beige)" }}
-            >
-              Etapa {step.number}
+            <div className={step.offset}>
+              <div className="editorial-eyebrow mb-3 text-beige/80">
+                Etapa {step.number}
+              </div>
+              <h3 className="display-mag mb-5 text-4xl text-cream md:text-5xl">
+                {step.title}
+              </h3>
+              <p className="max-w-[300px] text-[0.95rem] font-light leading-relaxed text-cream/80">
+                {step.copy}
+              </p>
             </div>
-            <h3 className="display-mag mb-5 text-4xl text-cream md:text-5xl">
-              {step.title}
-            </h3>
-            <p className="max-w-[280px] text-sm font-light leading-relaxed text-cream/75">
-              {step.copy}
-            </p>
           </div>
         ))}
       </div>
