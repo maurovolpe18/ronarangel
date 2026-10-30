@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  NEWSLETTER_PENDING_MESSAGE,
+  NEWSLETTER_SUCCESS_MESSAGE,
   markNewsletterPopupDismissed,
   markNewsletterSubscribed,
-  shouldShowNewsletterPopup
+  shouldShowNewsletterPopup,
+  subscribeToNewsletter
 } from "@/lib/newsletter";
 
 const SHOW_AFTER_MS = 35_000;
@@ -29,6 +30,8 @@ function isNewsletterSectionVisible() {
 export function NewsletterPopup() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -124,10 +127,21 @@ export function NewsletterPopup() {
     return () => window.clearTimeout(timer);
   }, [submitted]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    markNewsletterSubscribed();
-    setSubmitted(true);
+    if (sending) return;
+    const email = String(new FormData(event.currentTarget).get("email") ?? "");
+
+    setSending(true);
+    setError("");
+    const result = await subscribeToNewsletter(email);
+    setSending(false);
+    if (result.ok) {
+      markNewsletterSubscribed();
+      setSubmitted(true);
+    } else {
+      setError(result.message);
+    }
   };
 
   if (!open) return null;
@@ -173,7 +187,7 @@ export function NewsletterPopup() {
           className="mt-5 text-sm font-light leading-relaxed text-cream/85"
           aria-live="polite"
         >
-          {NEWSLETTER_PENDING_MESSAGE}
+          {NEWSLETTER_SUCCESS_MESSAGE}
         </p>
       ) : (
         <>
@@ -196,11 +210,18 @@ export function NewsletterPopup() {
               />
               <button
                 type="submit"
-                className="editorial-eyebrow h-12 w-full cursor-pointer bg-cream px-4 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+                disabled={sending}
+                className="editorial-eyebrow h-12 w-full cursor-pointer bg-cream px-4 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
               >
                 Quiero ser parte del club <span aria-hidden="true">🏹</span>
               </button>
             </div>
+            <p
+              className="mt-3 min-h-[1.25rem] text-sm font-light leading-relaxed text-cream/80"
+              aria-live="polite"
+            >
+              {error}
+            </p>
           </form>
         </>
       )}

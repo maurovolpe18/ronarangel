@@ -3,19 +3,32 @@
 import Image from "next/image";
 import { useState } from "react";
 import {
-  NEWSLETTER_PENDING_MESSAGE,
-  markNewsletterSubscribed
+  NEWSLETTER_SUCCESS_MESSAGE,
+  markNewsletterSubscribed,
+  subscribeToNewsletter
 } from "@/lib/newsletter";
 
-// Sin servicio conectado todavía: el formulario no guarda suscripciones y, al
-// enviarlo, lo avisa en lugar de simular un alta.
 export function NewsletterSection() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    markNewsletterSubscribed();
-    setSubmitted(true);
+    if (status !== "idle") return;
+    const form = event.currentTarget;
+    const email = String(new FormData(form).get("email") ?? "");
+
+    setStatus("sending");
+    setError("");
+    const result = await subscribeToNewsletter(email);
+    if (result.ok) {
+      markNewsletterSubscribed();
+      form.reset();
+      setStatus("done");
+    } else {
+      setError(result.message);
+      setStatus("idle");
+    }
   };
 
   return (
@@ -70,7 +83,8 @@ export function NewsletterSection() {
             />
             <button
               type="submit"
-              className="editorial-eyebrow h-14 w-full bg-cream px-7 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+              disabled={status === "sending"}
+              className="editorial-eyebrow h-14 w-full bg-cream px-7 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:opacity-60"
             >
               Quiero ser parte del club <span aria-hidden="true">🏹</span>
             </button>
@@ -79,7 +93,7 @@ export function NewsletterSection() {
             className="mt-4 min-h-[1.5rem] text-sm font-light leading-relaxed text-cream/80"
             aria-live="polite"
           >
-            {submitted ? NEWSLETTER_PENDING_MESSAGE : ""}
+            {status === "done" ? NEWSLETTER_SUCCESS_MESSAGE : error}
           </p>
         </form>
       </div>

@@ -7,9 +7,33 @@ const DISMISSED_AT_KEY = "rr-newsletter-popup-dismissed-at";
 /** Tiempo que el popup permanece oculto después de cerrarlo con la X. */
 const POPUP_HIDDEN_FOR_MS = 7 * 24 * 60 * 60 * 1000;
 
-// Mientras no haya un servicio conectado, ningún formulario guarda el email.
-export const NEWSLETTER_PENDING_MESSAGE =
-  "Gracias por tu interés. La newsletter todavía no está activa: muy pronto podrás suscribirte.";
+export const NEWSLETTER_SUCCESS_MESSAGE =
+  "¡Listo! Ya eres parte del club. Pronto recibirás tu primera carta.";
+
+export type SubscribeResult = { ok: true } | { ok: false; message: string };
+
+/** Envía el email a /api/subscribe (Worker de Cloudflare → audiencia de Resend). */
+export async function subscribeToNewsletter(
+  email: string
+): Promise<SubscribeResult> {
+  try {
+    const response = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    if (response.ok) return { ok: true };
+    if (response.status === 400) {
+      return { ok: false, message: "Revisa que el email esté bien escrito." };
+    }
+  } catch {
+    // Sin conexión o endpoint inaccesible: cae en el mensaje genérico.
+  }
+  return {
+    ok: false,
+    message: "No pudimos suscribirte ahora. Inténtalo de nuevo en un momento."
+  };
+}
 
 // localStorage puede no estar disponible (modo privado, almacenamiento
 // bloqueado); en ese caso se actúa como si no hubiera nada guardado.

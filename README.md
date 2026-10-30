@@ -129,9 +129,22 @@ import {
 ## Newsletter
 
 Hay una sección de newsletter (`components/sections/NewsletterSection.tsx`) y un
-popup (`components/NewsletterPopup.tsx`). Todavía no hay un servicio conectado:
-al enviar, ninguno de los dos guarda el email y ambos avisan que la newsletter
-aún no está activa.
+popup (`components/NewsletterPopup.tsx`). Ambos envían el email a
+`POST /api/subscribe`, que atiende el Worker de `worker/index.ts` y lo guarda
+como contacto de un segmento de Resend. La API key es un secreto del Worker y
+nunca llega al navegador.
+
+Configuración (una vez):
+
+1. En Resend, crear un segmento (Segments) y copiar su ID, y crear una API key
+   con permiso *Full access* (API Keys).
+2. Producción: `npx wrangler secret put RESEND_API_KEY` y
+   `npx wrangler secret put RESEND_SEGMENT_ID`, y luego volver a desplegar.
+3. Local: copiar `.dev.vars.example` a `.dev.vars`, completar los valores,
+   ejecutar `npm run build` y `npx wrangler dev`. `npm run dev` solo sirve el
+   sitio: sin el Worker, `/api/subscribe` no existe.
+
+Las cartas se envían desde el panel de Resend (Broadcasts) a ese segmento.
 
 El popup aparece tras 35 segundos o cuando el scroll se detiene pasada la mitad
 de la página, salvo que la sección de newsletter ya esté a la vista; si está

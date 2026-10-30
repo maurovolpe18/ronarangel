@@ -17,6 +17,8 @@ next-env.d.ts
 # Environment files
 .env*
 !.env.example
+.dev.vars
+/.wrangler/
 
 # Logs and operating-system files
 *.log
