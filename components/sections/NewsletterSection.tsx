@@ -56,16 +56,29 @@ export function NewsletterSection() {
           id="newsletter-title"
           className="display-mag text-[12vw] leading-[0.92] text-cream md:text-[4.6vw] lg:text-[4.2vw]"
         >
-          Únete al club de{" "}
+          El Club de{" "}
           <span className="display-mag-bold italic-accent text-peach">
-            las almas creativas
+            las Almas Creativas
           </span>
         </h2>
-        <p className="mt-8 max-w-md text-lg font-light leading-relaxed text-cream/85">
-          Una carta semanal llena de ideas, reflexiones y hallazgos para nutrir
-          tu creatividad, despertar tu curiosidad e inspirarte a mirar el mundo
-          de otra manera.
-        </p>
+        <div className="mt-8 max-w-md space-y-4 text-lg font-light leading-relaxed text-cream/85">
+          <p>
+            Siempre estoy guardando cosas: fotografías, fragmentos de libros,
+            canciones, conversaciones, ideas que aparecen en cualquier momento y
+            pensamientos que me gustaría compartir con alguien.
+          </p>
+          <p>De ahí nace este club.</p>
+          <p>
+            Un espacio para encontrarnos a través de la creatividad, la
+            fotografía, las historias y todas esas pequeñas cosas que despiertan
+            nuestra curiosidad.
+          </p>
+          <p>
+            De vez en cuando te enviaré una carta con algo de lo que he estado
+            viendo, leyendo, pensando o descubriendo.
+          </p>
+          <p>Me encantará que seas parte.</p>
+        </div>
 
         <form onSubmit={handleSubmit} className="mt-10 w-full max-w-xl">
           <label htmlFor="newsletter-email" className="sr-only">
@@ -79,14 +92,14 @@ export function NewsletterSection() {
               autoComplete="email"
               required
               placeholder="Tu email"
-              className="h-14 w-full border border-cream/50 bg-transparent px-5 text-lg font-light text-cream transition-colors placeholder:text-cream/55 focus:border-cream focus:outline-none"
+              className="h-14 w-full rounded-full border border-cream/50 bg-transparent px-6 text-lg font-light text-cream transition-colors placeholder:text-cream/55 focus:border-cream focus:outline-none"
             />
             <button
               type="submit"
               disabled={status === "sending"}
-              className="editorial-eyebrow h-14 w-full bg-cream px-7 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:opacity-60"
+              className="editorial-eyebrow h-14 w-full rounded-full bg-cream px-7 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:opacity-60"
             >
-              Quiero ser parte del club <span aria-hidden="true">🏹</span>
+              Quiero unirme al club. <span aria-hidden="true">🏹</span>
             </button>
           </div>
           <p

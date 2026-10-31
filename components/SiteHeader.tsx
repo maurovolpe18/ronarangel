@@ -103,7 +103,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href="#contacto"
-            className="editorial-eyebrow hidden px-4 py-2 transition-colors duration-500 sm:block"
+            className="editorial-eyebrow hidden rounded-full px-5 py-2.5 transition-colors duration-500 sm:block"
             style={{
               backgroundColor: solid ? "var(--ink)" : "var(--cream)",
               color: solid ? "var(--cream)" : "var(--ink)"

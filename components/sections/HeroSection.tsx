@@ -34,19 +34,18 @@ export function HeroSection() {
             <div className="rule-thin mb-6 w-12 bg-current opacity-60" />
             {/* Tres líneas en escritorio; en mobile se equilibra el corte solo. */}
             <h1 className="display-mag text-balance text-4xl font-light md:whitespace-nowrap leading-[1.02] text-cream md:text-5xl lg:text-6xl min-[1400px]:text-7xl">
-              Construyo marcas desde la
+              Ideas con <span className="italic-accent text-rust">identidad.</span>
               <br className="hidden md:block" />{" "}
-              <span className="italic-accent text-rust">sensibilidad</span>, la estética
-              <br className="hidden md:block" />{" "}
-              y la intención.
+              Marcas con algo propio que contar.
             </h1>
-            <p className="mt-6 max-w-sm text-sm font-light leading-relaxed opacity-85 md:text-base">
-              A través del diseño, la fotografía y una forma de comunicar que
-              conecta.
+            <p className="mt-6 max-w-md text-sm font-light leading-relaxed opacity-85 md:text-base">
+              Me dedico a dar forma a ideas a través del diseño, la comunicación y
+              la dirección creativa. Me gusta involucrarme, explorar posibilidades
+              y crear proyectos que tengan tanto personalidad como sentido.
             </p>
             <a
               href="#trabajos"
-              className="editorial-eyebrow mt-10 inline-flex items-center gap-3 px-5 py-3 transition-all hover:gap-5"
+              className="editorial-eyebrow mt-10 inline-flex items-center gap-3 rounded-full px-6 py-3.5 transition-all hover:gap-5"
               style={{ backgroundColor: "var(--beige)", color: "var(--ink)" }}
             >
               Ver proyectos <span aria-hidden="true">→</span>

@@ -74,9 +74,9 @@ export function ContactForm() {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
         <button
           type="submit"
-          className="editorial-eyebrow shrink-0 whitespace-nowrap bg-cream text-ink px-6 py-3 hover:bg-rust hover:text-cream transition-colors w-full md:w-auto focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+          className="editorial-eyebrow shrink-0 whitespace-nowrap rounded-full bg-cream text-ink px-7 py-3.5 hover:bg-rust hover:text-cream transition-colors w-full md:w-auto focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
         >
-          Enviar mensaje →
+          Hablemos. →
         </button>
         <p className="text-xs font-light leading-relaxed text-cream/60" aria-live="polite">
           {opened

@@ -206,12 +206,12 @@ export function NewsletterPopup() {
                 autoComplete="email"
                 required
                 placeholder="Tu email"
-                className="h-12 w-full min-w-0 border border-cream/50 bg-transparent px-4 font-light text-cream transition-colors placeholder:text-cream/55 focus:border-cream focus:outline-none"
+                className="h-12 w-full min-w-0 rounded-full border border-cream/50 bg-transparent px-5 font-light text-cream transition-colors placeholder:text-cream/55 focus:border-cream focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={sending}
-                className="editorial-eyebrow h-12 w-full cursor-pointer bg-cream px-4 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
+                className="editorial-eyebrow h-12 w-full cursor-pointer rounded-full bg-cream px-4 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
               >
                 Quiero ser parte del club <span aria-hidden="true">🏹</span>
               </button>

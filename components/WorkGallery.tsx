@@ -163,7 +163,7 @@ export function WorkGallery() {
               />
               <span
                 aria-hidden="true"
-                className="editorial-eyebrow absolute bottom-4 right-4 inline-flex items-center gap-2 bg-cream px-4 py-2 text-ink opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100"
+                className="editorial-eyebrow absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 text-ink opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100"
               >
                 Ver proyecto +
               </span>

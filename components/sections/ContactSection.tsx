@@ -25,19 +25,22 @@ export function ContactSection() {
           <div className="editorial-eyebrow mb-6 text-cream/60">
             Trabajemos juntos
           </div>
-          <h2 className="display-mag mb-10 text-[12vw] leading-[0.9] text-cream md:text-[6.5vw] lg:text-[5.5vw]">
-            Si conectas
+          <h2 className="display-mag mb-8 text-[12vw] leading-[0.9] text-cream md:text-[6.5vw] lg:text-[5.5vw]">
+            Me encantaría
             <br />
-            con lo que{" "}
-            <span className="italic-accent text-rust">
-              viste
-            </span>
-            ,
+            <span className="display-mag-bold">conocer lo que</span>
             <br />
-            <span className="display-mag-bold">creemos algo</span>
-            <br />
-            juntos.
+            estás{" "}
+            <span className="italic-accent text-rust">creando.</span>
           </h2>
+          <div className="max-w-md space-y-4 font-light leading-relaxed text-cream/80">
+            <p>
+              Si tienes un proyecto en mente, estás buscando dirección creativa
+              o necesitas ayuda para desarrollar la identidad visual de tu marca,
+              conversemos.
+            </p>
+            <p>Cuéntame en qué estás trabajando.</p>
+          </div>
           <div className="mt-10 max-w-md space-y-5">
             <a
               href="https://wa.me/5491156925330?text=Hola%2C%20quiero%20agendar%20una%20llamada"

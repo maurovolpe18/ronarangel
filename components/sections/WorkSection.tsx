@@ -22,28 +22,33 @@ export function WorkSection() {
         </div>
         <div className="col-span-12 md:col-start-8 md:col-span-5 md:mt-10">
           <p className="max-w-md text-base font-light leading-relaxed text-ink-soft md:text-lg">
-            Trabajos donde cada marca y cada imagen responden a una intención.
-            Una composición editorial entre el diseño y la fotografía.
+            Una selección de proyectos que he tenido la oportunidad de
+            conceptualizar, diseñar y desarrollar.
+            <br />
+            <br />
+            Diferentes historias, necesidades y maneras de hacer las cosas. Cada
+            proyecto tiene su propio recorrido, y eso es precisamente lo que más
+            disfruto: que ninguno se resuelve exactamente igual.
           </p>
         </div>
       </div>
 
       <WorkGallery />
 
-      <Reveal className="mt-16 grid grid-cols-12 gap-x-6 gap-y-8 border-t border-ink/15 pt-12 md:mt-20 md:pt-16">
-        <h3 className="display-mag col-span-12 text-4xl md:col-span-6 md:text-5xl lg:text-6xl">
-          ¿Tienes una idea <span className="italic-accent">en mente?</span>
+      <Reveal className="mt-12 grid grid-cols-12 items-center gap-x-6 gap-y-6 rounded-3xl bg-wine p-8 text-cream md:mt-16 md:p-14">
+        <h3 className="display-mag col-span-12 text-4xl text-cream md:col-span-6 md:text-5xl lg:text-6xl">
+          ¿Tienes un proyecto <span className="font-light italic text-peach">en mente?</span>
         </h3>
         <div className="col-span-12 md:col-start-8 md:col-span-5">
-          <p className="max-w-sm text-base font-light leading-relaxed text-ink-soft">
-            Me encantaría conocer tu proyecto y explorar cómo podemos darle
-            forma.
+          <p className="max-w-sm text-base font-light leading-relaxed text-cream/85">
+            Me encantaría conocerlo. Podemos conversar sobre lo que estás
+            creando, lo que necesitas y cómo podría acompañarte.
           </p>
           <a
             href="#contacto"
-            className="editorial-eyebrow group mt-8 inline-flex items-center gap-4 border border-ink px-5 py-3 text-ink transition-colors hover:bg-ink hover:text-cream focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wine"
+            className="editorial-eyebrow group mt-8 inline-flex items-center gap-4 rounded-full bg-cream px-6 py-3.5 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
           >
-            Hablemos de tu proyecto
+            Hablemos de tu proyecto.
             <span
               aria-hidden="true"
               className="transition-transform duration-300 motion-safe:group-hover:translate-x-1"

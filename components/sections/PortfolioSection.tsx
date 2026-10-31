@@ -24,9 +24,13 @@ export function PortfolioSection() {
           </div>
           <div className="col-span-12 flex items-end md:col-start-8 md:col-span-5">
             <p className="max-w-md text-base font-light leading-relaxed text-ink-soft md:text-lg">
-              Mi trabajo conecta estrategia, creatividad y comunicación visual.
-              Explora las distintas formas en las que acompaño a marcas y
-              proyectos a construir una identidad propia.
+              Hay proyectos que necesitan encontrar su identidad desde cero. Otros
+              necesitan una nueva dirección, una campaña, piezas gráficas o
+              simplemente una perspectiva diferente.
+              <br />
+              <br />
+              Trabajo en distintas etapas del proceso creativo, desde el análisis
+              y la conceptualización hasta el diseño y el desarrollo visual.
             </p>
           </div>
         </div>

@@ -23,7 +23,7 @@ export function ProcessSection() {
         </p>
         <a
           href="#contacto"
-          className="editorial-eyebrow self-start px-5 py-3 transition-opacity hover:opacity-80 md:self-auto"
+          className="editorial-eyebrow self-start rounded-full px-6 py-3.5 transition-opacity hover:opacity-80 md:self-auto"
           style={{ backgroundColor: "var(--beige)", color: "var(--ink)" }}
         >
           Agendar llamada →
