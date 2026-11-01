@@ -27,7 +27,7 @@ export function AboutSection() {
             />
           </div>
 
-          <Reveal className="relative z-10 order-2 col-span-12 -mt-10 mx-4 border border-ink bg-cream p-7 font-display text-lead font-light text-ink md:order-3 md:col-span-4 md:mx-0 md:-ml-[6vw] md:mt-[9vw] md:self-start md:p-10 md:pr-8 md:w-[calc(100%+6vw)] md:![transform:none] md:!opacity-100">
+          <Reveal className="reveal-card relative z-10 order-2 col-span-12 -mt-10 mx-4 border border-ink bg-cream p-7 font-display text-lead font-light text-ink md:order-3 md:col-span-4 md:mx-0 md:-ml-[6vw] md:mt-[9vw] md:self-start md:p-10 md:pr-8 md:w-[calc(100%+6vw)] md:![transform:none] md:!opacity-100">
             <p>
               Vengo del periodismo, de hacer preguntas, observar y contar
               historias. Con el tiempo encontré en el diseño otra manera de

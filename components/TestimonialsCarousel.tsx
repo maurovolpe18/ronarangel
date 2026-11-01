@@ -63,7 +63,8 @@ export function TestimonialsCarousel() {
       <div className="mb-10 grid grid-cols-12 gap-4 md:mb-14">
         <div className="col-span-12">
           <h2 className="font-display text-title font-extralight tracking-[-0.045em] md:whitespace-nowrap">
-            Algunas <span className="font-semibold text-wine">palabras</span>{" "}
+            Algunas <span className="font-semibold text-wine">palabras</span>
+            <br className="md:hidden" />{" "}
             sobre mi trabajo.
           </h2>
         </div>
