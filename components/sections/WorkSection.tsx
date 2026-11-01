@@ -18,7 +18,7 @@ export function WorkSection() {
           </h2>
         </div>
         <div className="col-span-12 md:col-start-8 md:col-span-5">
-          <p className="max-w-md text-base font-light leading-relaxed text-ink-soft">
+          <p className="max-w-md text-[3.5vw] font-light leading-relaxed tracking-[-0.01em] text-ink-soft md:text-base md:tracking-normal">
             Una selección de proyectos que he tenido la oportunidad de
             conceptualizar, diseñar y desarrollar.
             <br />

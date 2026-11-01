@@ -18,6 +18,11 @@ const HOVER_LOCK_MS = 750;
 
 export function DisciplineAccordion() {
   const [active, setActive] = useState<number | null>(0);
+  // Solo en mobile: filas que se abrieron solas al bajar. No se cierran al
+  // seguir bajando, para que el contenido de arriba no se encoja y la página
+  // no salte.
+  const [autoOpened, setAutoOpened] = useState<ReadonlySet<number>>(new Set());
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
   const hoverTimer = useRef<number | undefined>(undefined);
   const locked = useRef(false);
   const lockTimer = useRef<number | undefined>(undefined);
@@ -31,6 +36,39 @@ export function DisciplineAccordion() {
     []
   );
 
+  // Mobile: cada servicio se despliega cuando su fila llega a la mitad de la
+  // pantalla al bajar. En escritorio sigue el comportamiento con el mouse.
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = rowRefs.current.indexOf(entry.target as HTMLDivElement);
+          if (index < 0) return;
+          setAutoOpened((current) => {
+            if (current.has(index)) return current;
+            const next = new Set(current);
+            next.add(index);
+            return next;
+          });
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -45% 0px" }
+    );
+    rowRefs.current.forEach((row) => row && observer.observe(row));
+    return () => observer.disconnect();
+  }, []);
+
+  const closeAuto = (index: number) =>
+    setAutoOpened((current) => {
+      if (!current.has(index)) return current;
+      const next = new Set(current);
+      next.delete(index);
+      return next;
+    });
+
   const open = (index: number) => {
     locked.current = true;
     window.clearTimeout(lockTimer.current);
@@ -43,13 +81,16 @@ export function DisciplineAccordion() {
   return (
     <div className="border-t border-ink/15">
       {disciplines.map((discipline, index) => {
-        const isOpen = active === index;
+        const isOpen = active === index || autoOpened.has(index);
         const panelId = `disciplina-${discipline.number}`;
         const { href } = discipline;
 
         return (
           <div
             key={discipline.number}
+            ref={(node) => {
+              rowRefs.current[index] = node;
+            }}
             className="border-b border-ink/15 transition-colors"
           >
             <h3>
@@ -73,8 +114,11 @@ export function DisciplineAccordion() {
                   // detail 0: activado con el teclado.
                   if (event.detail > 0 && pointerType.current === "mouse") {
                     open(index);
+                  } else if (isOpen) {
+                    closeAuto(index);
+                    if (active === index) setActive(null);
                   } else {
-                    setActive(isOpen ? null : index);
+                    setActive(index);
                   }
                 }}
               >

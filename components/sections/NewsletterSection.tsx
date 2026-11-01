@@ -117,11 +117,10 @@ export function NewsletterSection() {
           <Reveal className="md:col-span-6 md:pl-4 lg:pl-8">
             <h2
               id="newsletter-title"
-              className="font-display text-title font-normal tracking-[-0.045em] text-cream"
+              className="font-display text-[8.4vw] font-normal leading-[1.02] tracking-[-0.045em] text-cream md:text-title"
             >
               El club de
-              <br />
-              las almas
+              <br className="hidden md:block" /> las almas
               <br />
               creativas{" "}
               {/* El emoji de la maqueta como imagen, para que se vea igual en

@@ -9,7 +9,7 @@ export function HeroSection() {
     >
       {/* Retrato recortado, centrado y atenuado; se corta en el borde inferior y
           el titular pasa por delante. */}
-      <div className="pointer-events-none absolute left-1/2 top-[18%] w-[62vw] max-w-[22rem] -translate-x-1/2 md:top-[15%] md:w-[24vw] md:max-w-none">
+      <div className="pointer-events-none absolute left-1/2 top-[11%] w-[62vw] max-w-[22rem] -translate-x-[38%] md:top-[15%] md:w-[24vw] md:max-w-none md:-translate-x-1/2">
         <Image
           src="/images/hero-cutout.webp"
           alt="Rona Rangel"
@@ -21,7 +21,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 px-6 pb-14 pt-40 text-cream md:px-12 md:pb-[17vh] lg:px-14">
+      <div className="relative z-10 px-6 pb-24 pt-40 text-cream md:px-12 md:pb-[17vh] lg:px-14">
         {/* Todo se mide en vw para que titular y párrafo escalen juntos: el
             párrafo se ancla a la base de "identidad", no a la pantalla. */}
         <div className="relative">

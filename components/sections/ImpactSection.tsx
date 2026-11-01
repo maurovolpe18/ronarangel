@@ -23,14 +23,14 @@ export function ImpactSection() {
       <div className="absolute inset-0 z-10 flex items-center justify-center px-6">
         <Reveal className="text-cream">
           <div className="flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-8">
-            <span className="font-display text-stat font-bold tracking-[-0.05em]">
+            <span className="font-display text-[34vw] font-bold leading-[0.85] tracking-[-0.05em] md:text-stat">
               <CountUp to={100} prefix="+" />
             </span>
             <div className="font-display">
-              <span className="block text-[clamp(2rem,4.2vw,3.75rem)] font-light leading-[0.95] tracking-[-0.02em]">
+              <span className="block text-[13.5vw] font-light md:text-[clamp(2rem,4.2vw,3.75rem)] leading-[0.95] tracking-[-0.02em]">
                 MARCAS
               </span>
-              <span className="block text-[clamp(1.55rem,3.25vw,2.9rem)] font-bold italic leading-[0.95] tracking-[-0.02em]">
+              <span className="block text-[10.4vw] font-bold italic md:text-[clamp(1.55rem,3.25vw,2.9rem)] leading-[0.95] tracking-[-0.02em]">
                 DOCUMENTADAS
               </span>
               <p className="mt-4 text-lead font-light">
