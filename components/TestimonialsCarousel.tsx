@@ -81,7 +81,7 @@ export function TestimonialsCarousel() {
 
               return (
                 <div
-                  key={testimonial.title}
+                  key={testimonial.name}
                   className="shrink-0 px-3 md:px-4"
                   style={{ width: `${slideWidth}%` }}
                   aria-hidden={!visible}
@@ -92,28 +92,26 @@ export function TestimonialsCarousel() {
                     }`}
                   >
                     <div>
-                      <h3 className="mb-6 font-display text-subtitle font-light tracking-[-0.03em]">
+                      <span
+                        aria-hidden="true"
+                        className="block font-display text-6xl font-light leading-[0.6] text-wine"
+                      >
                         &ldquo;
-                        <span className="italic-accent">{testimonial.title}</span>
-                        &rdquo;
-                      </h3>
-                      <p className="text-base font-light leading-relaxed text-ink/85">
-                        {testimonial.quote}
-                      </p>
+                      </span>
+                      <blockquote className="mt-4 space-y-3 text-base font-light leading-relaxed text-ink/85">
+                        {testimonial.quote.map((paragraph) => (
+                          <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                        ))}
+                      </blockquote>
                     </div>
                     <footer className="mt-10 flex items-center gap-3">
                       <span
                         aria-hidden="true"
                         className="h-px w-[22px] shrink-0 bg-wine"
                       />
-                      <div className="flex flex-col">
-                        <span className="font-display text-sm font-medium text-ink">
-                          {testimonial.name}
-                        </span>
-                        <span className="font-display text-sm font-light italic text-wine/85">
-                          {testimonial.role}
-                        </span>
-                      </div>
+                      <span className="font-display text-sm font-medium text-ink">
+                        {testimonial.name}
+                      </span>
                     </footer>
                   </article>
                 </div>

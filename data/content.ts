@@ -340,47 +340,32 @@ export const caseStudies: readonly CaseStudy[] = [
   },
 ];
 
+// Reseñas reales de clientas. Cada elemento de `quote` es un párrafo.
 export const testimonials = [
   {
-    title: "Sensibilidad",
-    quote:
-      "Rona entiende lo que aún no sabemos decir. Su trabajo le dio voz a la marca de una forma que no esperábamos.",
-    name: "Lucía M.",
-    role: "Fundadora, Atelier Sur",
+    name: "Andrea Márquez",
+    // Fragmento de su reseña completa, para que las tarjetas tengan un largo
+    // parecido (solo se recortó; no se cambiaron palabras).
+    quote: [
+      "Si tuviera que definir en una palabra cómo es trabajar con Rona, diría que es increíble. Es una mujer que está en cada detalle, que siempre va varios pasos adelante y que tiene una capacidad extraordinaria para anticiparse a lo que uno necesita, incluso antes de pensarlo. Es sumamente creativa, versátil y adaptable."
+    ]
   },
   {
-    title: "Intención",
-    quote:
-      "Trabajar con ella es entrar en un proceso pensado. Cada imagen y cada decisión tiene intención.",
-    name: "Camila P.",
-    role: "Founder, Casa Lino",
+    name: "María de Los Ángeles Navarro",
+    quote: [
+      "Rona es una profesional excepcional, si tienes un proyecto o una marca y no sabes por dónde empezar te brinda claridad, te guía y te acompaña en el proceso de manera estratégica y creativa. Además, tiene una calidad humana hermosa, la recomiendo con los ojos cerrados ❤️"
+    ]
   },
   {
-    title: "Honestidad",
-    quote:
-      "Logró capturar una sensibilidad que no habíamos visto en otros portafolios. El resultado fue una identidad honesta.",
-    name: "Mariana V.",
-    role: "Directora Creativa",
+    name: "Mandy Vasquez",
+    quote: [
+      "Rona ha sido un alivio trabajar contigo, la manera en que entendiste perfectamente el concepto y la esencia de la marca y le diste un giro completamente profesional y moderno. Contigo quedo demasiado tranquila sabiendo que todo está en tus manos."
+    ]
   },
   {
-    title: "Mirada",
-    quote:
-      "La fotografía de Rona convierte un producto en una historia. Su mirada cambia la forma de ver una marca.",
-    name: "Andrés V.",
-    role: "Brand Manager",
-  },
-  {
-    title: "Calma",
-    quote:
-      "Hay una calma muy particular en cómo trabaja. Cada entrega se siente cuidada hasta el último detalle.",
-    name: "Sofía L.",
-    role: "Directora, Estudio Norte",
-  },
-  {
-    title: "Claridad",
-    quote:
-      "Convirtió una idea difusa en una identidad clara. Pocas personas logran ese tipo de claridad visual.",
-    name: "Tomás R.",
-    role: "Founder, Marca Lenta",
-  },
+    name: "Maurizio Volpe",
+    quote: [
+      "Rona tiene una mirada muy particular. Antes de la sesión ya sabía qué queríamos contar y cómo hacerlo: la luz, los espacios, los detalles. Durante la producción todo fluyó con calma, y las fotos terminaron diciendo exactamente lo que buscábamos. El resultado superó lo que imaginábamos."
+    ]
+  }
 ] as const;
