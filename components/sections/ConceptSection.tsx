@@ -1,34 +1,30 @@
+import { Reveal } from "@/components/Reveal";
+
 export function ConceptSection() {
   return (
     <section
       id="concepto"
-      className="relative overflow-hidden bg-cream px-6 pb-14 pt-8 md:px-12 md:pb-20 md:pt-10"
+      className="flex min-h-[70vh] items-center bg-[#fffeea] px-6 py-24 md:h-screen md:min-h-[36rem] md:py-0 md:pl-[14.2vw] md:pr-12"
     >
-      <div className="mx-auto max-w-5xl text-center">
-        <h2 className="display-mag-bold text-balance text-[9.5vw] md:text-[5vw]">
-          Una <span className="italic-accent font-light">idea</span> antes
-          <br />
-          que una imagen.
+      <Reveal className="w-full md:translate-y-[4.5vh]">
+        <h2 className="font-display text-[9vw] font-normal leading-[1.08] tracking-[-0.04em] text-[#5e2129] md:text-[4.72vw] md:leading-[1.19]">
+          Detrás de cada proyecto{" "}
+          <span className="font-semibold">
+            hay
+            <br className="hidden md:block" /> historias, preguntas y
+            posibilidades.
+          </span>
         </h2>
-        <p className="mt-5 text-lg font-medium tracking-[-0.01em] text-wine md:text-xl">
-          Construir una marca va más allá de lo visual.
+        {/* Siempre en dos líneas: cada una sin cortes, con el tamaño ligado al ancho. */}
+        <p className="mt-8 font-display text-[3.55vw] font-light leading-snug tracking-[-0.02em] text-black md:mt-[2.6vw] md:text-[2.3vw] md:leading-[1.3]">
+          <span className="block whitespace-nowrap">
+            Me gusta entender qué lo hace diferente y encontrar
+          </span>
+          <span className="block whitespace-nowrap">
+            la mejor manera de expresarlo visualmente.
+          </span>
         </p>
-      </div>
-      <div className="mx-auto mt-10 grid max-w-5xl gap-6 text-base font-light leading-relaxed text-ink-soft md:mt-12 md:grid-cols-3 md:gap-10">
-        <p>
-          Detrás de una identidad hay decisiones, preguntas, conversaciones y
-          muchas posibilidades por explorar.
-        </p>
-        <p>
-          Me interesa entender qué hace diferente a cada proyecto y encontrar la
-          manera de expresarlo con claridad, personalidad y una dirección visual
-          que tenga sentido.
-        </p>
-        <p>
-          Es una de las partes que más disfruto de mi trabajo: ese momento en el
-          que las ideas empiezan a encontrar su lugar.
-        </p>
-      </div>
+      </Reveal>
     </section>
   );
 }

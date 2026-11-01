@@ -8,7 +8,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
 import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
-import { Ticker } from "@/components/sections/Ticker";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { WorkSection } from "@/components/sections/WorkSection";
 
@@ -17,7 +16,6 @@ export default function Home() {
     <main className="overflow-x-hidden bg-cream text-ink">
       <SiteHeader />
       <HeroSection />
-      <Ticker />
       <ConceptSection />
       <AboutSection />
       <ImpactSection />

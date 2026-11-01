@@ -1,56 +1,42 @@
-import { getImageProps } from "next/image";
-
-const heroImage = {
-  alt: "Rona Rangel",
-  fill: true,
-  priority: true,
-  sizes: "100vw"
-} as const;
+import Image from "next/image";
 
 export function HeroSection() {
-  // Un solo <picture>: el navegador descarga únicamente la imagen que le toca,
-  // en vez de las dos versiones (escritorio y mobile).
-  const { props: desktop } = getImageProps({ ...heroImage, src: "/images/hero-desktop.jpg" });
-  const { props: mobile } = getImageProps({ ...heroImage, src: "/images/hero-mobile.jpg" });
-
   return (
     <section
       id="top"
-      className="relative min-h-screen w-full overflow-hidden bg-[var(--ink)]"
+      className="relative flex min-h-[100svh] w-full flex-col justify-end overflow-hidden bg-ink"
     >
-      <div className="absolute inset-0">
-        <picture>
-          <source media="(min-width: 768px)" srcSet={desktop.src} />
-          <img {...mobile} alt={mobile.alt} className="object-cover object-center" />
-        </picture>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80 md:bg-gradient-to-r md:from-black/50 md:via-black/15 md:to-transparent" />
+      {/* Retrato recortado, centrado y atenuado; se corta en el borde inferior y
+          el titular pasa por delante. */}
+      <div className="pointer-events-none absolute left-1/2 top-[18%] w-[62vw] max-w-[22rem] -translate-x-1/2 md:top-[15%] md:w-[24vw] md:max-w-none">
+        <Image
+          src="/images/hero-cutout.webp"
+          alt="Rona Rangel"
+          width={506}
+          height={1500}
+          priority
+          sizes="(min-width: 768px) 24vw, 62vw"
+          className="h-auto w-full opacity-40"
+        />
       </div>
-      <div className="relative z-10 flex min-h-screen flex-col justify-end pb-16 pt-32 md:pb-24">
-        <div className="grid grid-cols-12 gap-4 px-6 md:px-12 lg:px-16">
-          <div className="editorial-eyebrow absolute left-6 top-28 text-cream/70 md:left-12 md:top-36 md:text-cream lg:left-16">
-            Diseño · Fotografía · Dirección Creativa
-          </div>
-          <div className="col-span-12 mt-8 text-cream md:col-span-12 md:mt-10">
-            <div className="rule-thin mb-6 w-12 bg-current opacity-60" />
-            {/* Tres líneas en escritorio; en mobile se equilibra el corte solo. */}
-            <h1 className="display-mag text-balance text-4xl font-light md:whitespace-nowrap leading-[1.02] text-cream md:text-5xl lg:text-6xl min-[1400px]:text-7xl">
-              Ideas con <span className="italic-accent text-rust">identidad.</span>
-              <br className="hidden md:block" />{" "}
-              Marcas con algo propio que contar.
-            </h1>
-            <p className="mt-6 max-w-md text-sm font-light leading-relaxed opacity-85 md:text-base">
-              Me dedico a dar forma a ideas a través del diseño, la comunicación y
-              la dirección creativa. Me gusta involucrarme, explorar posibilidades
-              y crear proyectos que tengan tanto personalidad como sentido.
-            </p>
-            <a
-              href="#trabajos"
-              className="editorial-eyebrow mt-10 inline-flex items-center gap-3 rounded-full px-6 py-3.5 transition-all hover:gap-5"
-              style={{ backgroundColor: "var(--beige)", color: "var(--ink)" }}
-            >
-              Ver proyectos <span aria-hidden="true">→</span>
-            </a>
-          </div>
+
+      <div className="relative z-10 px-6 pb-14 pt-40 text-cream md:px-12 md:pb-[17vh] lg:px-14">
+        {/* Todo se mide en vw para que titular y párrafo escalen juntos: el
+            párrafo se ancla a la base de "identidad", no a la pantalla. */}
+        <div className="relative">
+          <h1 className="font-display text-cream">
+            <span className="block whitespace-nowrap text-[19vw] font-extralight leading-[0.9] tracking-[-0.045em] md:text-[12.4vw]">
+              ideas con
+            </span>
+            <span className="block text-right text-[20vw] font-normal leading-[0.85] tracking-[-0.05em] md:mt-[1vw] md:pl-[36vw] md:text-left md:text-[13.6vw]">
+              identidad
+            </span>
+          </h1>
+
+          <p className="mt-8 max-w-[20rem] font-display text-lg font-light leading-snug md:absolute md:bottom-[1.4vw] md:left-0 md:mt-0 md:w-[32vw] md:max-w-none md:text-[max(1.75vw,1.05rem)]">
+            Diseño y dirección creativa para dar forma a ideas, explorar
+            posibilidades y construir marcas con personalidad.
+          </p>
         </div>
       </div>
     </section>

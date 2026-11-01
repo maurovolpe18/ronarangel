@@ -1,6 +1,6 @@
 export const navigation = [
   { href: "#about", label: "Sobre mí", number: "01" },
-  { href: "#proyectos", label: "Portafolio", number: "02" },
+  { href: "#trabajos", label: "Portafolio", number: "02" },
   { href: "#contacto", label: "Contacto", number: "03" },
 ] as const;
 
@@ -80,15 +80,15 @@ export const services = [
 export const processSteps = [
   {
     number: "01",
-    title: "Discovery",
-    copy: "Conversamos. Entendemos contexto, intención y dirección. Definimos el lenguaje del proyecto.",
+    title: "Discovery Call",
+    copy: "Iniciamos con una llamada de descubrimiento para conocer la marca, sus objetivos, necesidades y contexto.",
     offset: "md:mt-6",
     delay: "0ms",
   },
   {
     number: "02",
-    title: "Visual Direction",
-    copy: "Construimos un universo visual: referencias, paleta, tipografía y atmósfera fotográfica.",
+    title: "Creative Brief",
+    copy: "Luego de la llamada, se envía un brief virtual que debe completarse de forma detallada.",
     offset: "md:mt-16",
     delay: "120ms",
   },

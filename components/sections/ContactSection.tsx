@@ -1,88 +1,67 @@
 import { ContactForm } from "@/app/ContactForm";
 
-const ROMAN_NUMERALS: [number, string][] = [
-  [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"],
-  [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]
+const links = [
+  {
+    label: "Whatsapp",
+    value: "Escribir",
+    href: "https://wa.me/5491156925330?text=Hola%2C%20quiero%20agendar%20una%20llamada",
+    external: true
+  },
+  {
+    label: "Instagram",
+    value: "@ronarangel",
+    href: "https://www.instagram.com/ronarangel/",
+    external: true
+  },
+  {
+    label: "Email",
+    value: "ronarangelmartinez@gmail.com",
+    href: "mailto:ronarangelmartinez@gmail.com",
+    external: false
+  }
 ];
-
-function toRoman(value: number) {
-  let rest = value;
-  return ROMAN_NUMERALS.reduce((result, [amount, symbol]) => {
-    const times = Math.floor(rest / amount);
-    rest -= times * amount;
-    return result + symbol.repeat(times);
-  }, "");
-}
 
 export function ContactSection() {
   return (
     <section
       id="contacto"
-      className="relative bg-ink px-6 py-20 text-cream md:px-12 md:py-28"
+      className="relative bg-ink px-6 py-20 text-cream md:px-12 md:py-16 lg:px-20"
     >
-      <div className="grid grid-cols-12 gap-8">
+      <div className="grid grid-cols-12 items-center gap-y-12 md:gap-x-8">
         <div className="col-span-12 md:col-span-6">
-          <div className="editorial-eyebrow mb-6 text-cream/60">
-            Trabajemos juntos
-          </div>
-          <h2 className="display-mag mb-8 text-[12vw] leading-[0.9] text-cream md:text-[6.5vw] lg:text-[5.5vw]">
-            Me encantaría
+          <h2 className="font-display text-[15vw] font-normal leading-[0.92] tracking-[-0.045em] text-cream md:text-[7.4vw]">
+            ¿Te gustaría
             <br />
-            <span className="display-mag-bold">conocer lo que</span>
-            <br />
-            estás{" "}
-            <span className="italic-accent text-rust">creando.</span>
+            crear juntos?
           </h2>
-          <div className="max-w-md space-y-4 font-light leading-relaxed text-cream/80">
-            <p>
-              Si tienes un proyecto en mente, estás buscando dirección creativa
-              o necesitas ayuda para desarrollar la identidad visual de tu marca,
-              conversemos.
-            </p>
-            <p>Cuéntame en qué estás trabajando.</p>
-          </div>
-          <div className="mt-10 max-w-md space-y-5">
-            <a
-              href="https://wa.me/5491156925330?text=Hola%2C%20quiero%20agendar%20una%20llamada"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between border-b border-cream/20 pb-3"
-            >
-              <span className="editorial-eyebrow text-cream/70">WhatsApp</span>
-              <span className="font-light transition-transform group-hover:translate-x-1">
-                Escribir →
-              </span>
-            </a>
-            <a
-              href="https://www.instagram.com/ronarangel/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between border-b border-cream/20 pb-3"
-            >
-              <span className="editorial-eyebrow text-cream/70">Instagram</span>
-              <span className="font-light transition-transform group-hover:translate-x-1">
-                @ronarangel →
-              </span>
-            </a>
-            <a
-              href="mailto:ronarangelmartinez@gmail.com"
-              className="group flex items-center justify-between border-b border-cream/20 pb-3"
-            >
-              <span className="editorial-eyebrow text-cream/70">Email</span>
-              <span className="font-light transition-transform group-hover:translate-x-1">
-                ronarangelmartinez@gmail.com →
-              </span>
-            </a>
+          <p className="mt-6 max-w-sm font-display text-lg font-light leading-snug tracking-[0.01em] text-cream md:text-[1.45vw]">
+            Cuéntame tu idea y conversemos sobre cómo podemos trabajar juntos.
+          </p>
+
+          <div className="mt-12 max-w-[37rem]">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                {...(link.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="group flex items-center justify-between gap-4 border-b border-cream/80 pb-4 pt-8 font-display text-lg font-light md:text-[1.45vw]"
+              >
+                <span>{link.label}</span>
+                <span className="truncate transition-opacity group-hover:opacity-70">
+                  {link.value}
+                </span>
+              </a>
+            ))}
           </div>
         </div>
+
         <ContactForm />
       </div>
-      <footer className="editorial-eyebrow mt-16 flex flex-col gap-4 border-t border-cream/15 pt-8 text-cream/60 md:mt-20 md:flex-row md:items-center md:justify-between">
-        <span>
-          © {toRoman(new Date().getFullYear())} · Rona Rangel · Todos los
-          derechos reservados
-        </span>
-        <span>Diseño &amp; Dirección Editorial — RR Studio</span>
+
+      <footer className="mt-12 font-display text-sm font-light text-cream md:mt-10 md:text-base">
+        Rona Rangel · Todos los derechos reservados
       </footer>
     </section>
   );

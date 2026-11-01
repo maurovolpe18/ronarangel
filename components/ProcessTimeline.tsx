@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { processSteps } from "@/data/content";
 
+// La línea se dibuja de izquierda a derecha, los puntos aparecen y los pasos
+// suben uno tras otro cuando el bloque entra en pantalla.
 export function ProcessTimeline() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -15,7 +17,7 @@ export function ProcessTimeline() {
       ([entry]) => {
         if (entry.isIntersecting) setVisible(true);
       },
-      { threshold: 0.35 }
+      { threshold: 0.25 }
     );
 
     observer.observe(node);
@@ -24,15 +26,11 @@ export function ProcessTimeline() {
 
   return (
     <div ref={ref} className="relative">
-      <div className="absolute left-0 right-0 top-0 hidden h-px bg-cream/15 md:block" />
       <div
-        className="absolute left-0 top-0 hidden h-px origin-left bg-cream/70 transition-transform duration-700 ease-out motion-reduce:transition-none md:block"
-        style={{
-          width: "100%",
-          transform: visible ? "scaleX(1)" : "scaleX(0)"
-        }}
+        className="absolute left-0 top-[11px] hidden h-px w-full origin-left bg-cream/80 transition-transform duration-1000 ease-out motion-reduce:transition-none md:block"
+        style={{ transform: visible ? "scaleX(1)" : "scaleX(0)" }}
       />
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+      <div className="grid grid-cols-1 gap-12 px-6 md:grid-cols-3 md:gap-8 md:px-[8vw]">
         {processSteps.map((step) => (
           <div
             key={step.number}
@@ -44,20 +42,21 @@ export function ProcessTimeline() {
             }}
           >
             <div
-              className="-mt-[5px] mb-10 hidden h-3 w-3 rounded-full bg-cream transition-transform duration-500 motion-reduce:transition-none md:block"
-              style={{ transform: visible ? "scale(1)" : "scale(0)" }}
+              className="mb-8 hidden h-[26px] w-[26px] -translate-y-px rounded-full bg-cream transition-transform duration-500 motion-reduce:transition-none md:block"
+              style={{
+                transform: visible ? "scale(1)" : "scale(0)",
+                transitionDelay: step.delay
+              }}
             />
-            <div className={step.offset}>
-              <div className="editorial-eyebrow mb-3 text-beige/80">
-                Etapa {step.number}
-              </div>
-              <h3 className="display-mag mb-5 text-4xl text-cream md:text-5xl">
-                {step.title}
-              </h3>
-              <p className="max-w-[300px] text-[0.95rem] font-light leading-relaxed text-cream/80">
-                {step.copy}
-              </p>
+            <div className="font-display text-[18vw] font-bold leading-none tracking-[-0.03em] text-white md:text-[6.4vw]">
+              {step.number}
             </div>
+            <h3 className="mt-4 font-display text-3xl font-semibold tracking-[-0.02em] text-white md:mt-6 md:text-[2.3vw]">
+              {step.title}
+            </h3>
+            <p className="mt-5 max-w-[19rem] font-display text-lg font-light leading-snug text-white/90 md:text-[1.45vw]">
+              {step.copy}
+            </p>
           </div>
         ))}
       </div>

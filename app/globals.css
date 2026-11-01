@@ -299,7 +299,9 @@
   html {
     scroll-padding-top: 7rem;
   }
+}
 
+@media (min-width: 64rem) {
   .site-nav__toggle,
   .mobile-navigation {
     display: none;

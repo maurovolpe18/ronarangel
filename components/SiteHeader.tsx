@@ -10,7 +10,7 @@ export function SiteHeader() {
   const firstMobileLink = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > window.innerHeight - 80);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -18,7 +18,7 @@ export function SiteHeader() {
 
   useEffect(() => {
     const closeDesktopMenu = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
+      if (window.innerWidth >= 1024) setMenuOpen(false);
     };
     const closeWithEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
@@ -45,82 +45,73 @@ export function SiteHeader() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
-  const solid = scrolled || menuOpen;
-  const navColor = solid ? "var(--ink)" : "oklch(0.92 0.018 95)";
 
   return (
     <nav
-      className={`site-nav fixed inset-x-0 top-0 z-50 transition-colors duration-500${
+      className={`site-nav fixed inset-x-0 top-0 z-50 text-cream transition-colors duration-500${
         menuOpen ? " is-menu-open" : ""
       }`}
       style={{
-        backgroundColor: solid
-          ? "color-mix(in oklab, var(--cream) 88%, transparent)"
-          : "transparent",
-        backdropFilter: solid ? "blur(10px)" : "none",
-        WebkitBackdropFilter: solid ? "blur(10px)" : "none",
-        borderBottom: solid
-          ? "1px solid color-mix(in oklab, var(--ink) 8%, transparent)"
-          : "1px solid transparent"
+        backgroundColor:
+          scrolled && !menuOpen
+            ? "color-mix(in oklab, var(--ink) 88%, transparent)"
+            : "transparent",
+        backdropFilter: scrolled && !menuOpen ? "blur(10px)" : "none",
+        WebkitBackdropFilter: scrolled && !menuOpen ? "blur(10px)" : "none"
       }}
     >
       <div
-        className="relative z-[2] flex items-center justify-between px-6 py-5 md:px-10"
+        className={`relative z-[2] grid grid-cols-[1fr_auto] items-center px-6 transition-[padding] duration-500 md:px-12 lg:grid-cols-[1fr_auto_1fr] lg:px-20 ${
+          scrolled ? "py-4" : "py-6 md:py-10"
+        }`}
       >
         <a
           href="#top"
-          className="flex items-center"
+          className="flex items-center justify-self-start"
           aria-label="Rona Rangel"
           onClick={closeMenu}
         >
           <Image
-            src="/images/brand/logo.webp"
+            src="/images/brand/logo-wordmark.webp"
             alt="Rona Rangel"
-            width={680}
-            height={383}
+            width={496}
+            height={99}
             priority
-            sizes="(min-width: 1024px) 170px, (min-width: 768px) 140px, 100px"
-            className="h-14 w-auto transition-[filter] duration-500 md:h-20 lg:h-24"
-            style={{ filter: solid ? "invert(1) brightness(0.15)" : "none" }}
+            sizes="(min-width: 768px) 190px, 140px"
+            className="h-7 w-auto md:h-9"
+            style={menuOpen ? { filter: "invert(1) brightness(0.15)" } : undefined}
           />
         </a>
 
-        <div
-          className="editorial-eyebrow hidden gap-8 transition-colors duration-500 md:flex"
-          style={{ color: navColor }}
-        >
+        <div className="hidden items-center gap-7 font-display text-[1.3rem] font-normal tracking-[-0.02em] lg:flex xl:gap-8 xl:text-[1.6rem]">
           {navigation.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="transition-opacity hover:opacity-70"
+              className="transition-opacity hover:opacity-60"
             >
-              {item.label}
+              {item.label.toLowerCase()}.
             </a>
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-self-end gap-2">
           <a
             href="#contacto"
-            className="editorial-eyebrow hidden rounded-full px-5 py-2.5 transition-colors duration-500 sm:block"
-            style={{
-              backgroundColor: solid ? "var(--ink)" : "var(--cream)",
-              color: solid ? "var(--cream)" : "var(--ink)"
-            }}
+            className="hidden rounded-full border border-cream/80 px-10 py-3 font-display text-lg font-extralight tracking-[-0.01em] transition-colors hover:bg-cream hover:text-ink sm:block xl:px-20 xl:text-xl"
             onClick={closeMenu}
           >
-            Hablemos →
+            Hablemos
           </a>
 
           <button
             type="button"
-            className="site-nav__toggle md:hidden"
+            className="site-nav__toggle lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setMenuOpen((current) => !current)}
-            style={{ color: navColor }}
+            style={{ color: menuOpen ? "var(--ink)" : "var(--cream)" }}
           >
             <span />
             <span />
@@ -131,7 +122,7 @@ export function SiteHeader() {
 
       <div
         id="mobile-navigation"
-        className="mobile-navigation md:hidden"
+        className="mobile-navigation lg:hidden"
         aria-hidden={!menuOpen}
       >
         <nav aria-label="Navegación móvil">
