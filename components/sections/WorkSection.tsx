@@ -6,22 +6,19 @@ export function WorkSection() {
     <section
       id="trabajos"
       aria-labelledby="trabajos-title"
-      className="paper-grain relative overflow-hidden bg-beige px-6 py-20 md:px-12 md:py-28"
+      className="relative overflow-hidden bg-white px-6 py-16 md:px-12 md:py-24"
     >
-      <div className="mb-12 grid grid-cols-12 gap-4 md:mb-16">
+      <Reveal className="mb-8 grid grid-cols-12 items-end gap-4 md:mb-10">
         <div className="col-span-12 md:col-span-6">
-          <div className="editorial-eyebrow mb-6 text-wine">
-            Trabajos seleccionados
-          </div>
           <h2
             id="trabajos-title"
-            className="display-mag text-[14vw] leading-[0.9] md:text-[7vw] lg:text-[6vw]"
+            className="font-display text-title tracking-[-0.045em]"
           >
-            <span className="display-mag-bold">Portafolio.</span>
+            <span className="font-semibold">Portafolio.</span>
           </h2>
         </div>
-        <div className="col-span-12 md:col-start-8 md:col-span-5 md:mt-10">
-          <p className="max-w-md text-base font-light leading-relaxed text-ink-soft md:text-lg">
+        <div className="col-span-12 md:col-start-8 md:col-span-5">
+          <p className="max-w-md text-base font-light leading-relaxed text-ink-soft">
             Una selección de proyectos que he tenido la oportunidad de
             conceptualizar, diseñar y desarrollar.
             <br />
@@ -31,22 +28,24 @@ export function WorkSection() {
             disfruto: que ninguno se resuelve exactamente igual.
           </p>
         </div>
-      </div>
+      </Reveal>
 
       <WorkGallery />
 
-      <Reveal className="mt-12 grid grid-cols-12 items-center gap-x-6 gap-y-6 rounded-3xl bg-wine p-8 text-cream md:mt-16 md:p-14">
-        <h3 className="display-mag col-span-12 text-4xl text-cream md:col-span-6 md:text-5xl lg:text-6xl">
-          ¿Tienes un proyecto <span className="font-light italic text-peach">en mente?</span>
+      <Reveal className="mt-14 grid grid-cols-12 items-center gap-x-6 gap-y-6 rounded-[2rem] bg-ink p-8 text-cream md:mt-20 md:p-14">
+        <h3 className="col-span-12 font-display text-[7.4vw] font-light leading-[1.05] tracking-[-0.04em] text-cream md:col-span-6 md:text-title">
+          ¿Tienes un proyecto
+          <br />
+          <span className="font-semibold text-peach">en mente?</span>
         </h3>
         <div className="col-span-12 md:col-start-8 md:col-span-5">
-          <p className="max-w-sm text-base font-light leading-relaxed text-cream/85">
+          <p className="max-w-sm text-base font-light leading-relaxed text-cream/80">
             Me encantaría conocerlo. Podemos conversar sobre lo que estás
             creando, lo que necesitas y cómo podría acompañarte.
           </p>
           <a
             href="#contacto"
-            className="editorial-eyebrow group mt-8 inline-flex items-center gap-4 rounded-full bg-cream px-6 py-3.5 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+            className="group mt-6 inline-flex items-center gap-4 rounded-full bg-cream px-7 py-3.5 font-display text-base text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
           >
             Hablemos de tu proyecto.
             <span

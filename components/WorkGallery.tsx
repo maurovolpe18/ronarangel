@@ -5,9 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { caseStudies } from "@/data/content";
 import { useInView } from "@/lib/useInView";
 
-const AUTOPLAY_MS = 4000;
+const AUTOPLAY_MS = 3500;
 // Tras tocar el carrusel, el avance automático espera este tiempo.
 const TOUCH_RESUME_MS = 6000;
+// La lista se repite tres veces y el carrusel vive en la copia del medio:
+// al acercarse a un extremo salta, sin animación, a la posición equivalente
+// de la copia central. Así nunca se llega a un final.
+const COPIES = 3;
 
 // Cada proyecto muestra su portada (la primera imagen). Al abrirlo, un diálogo
 // nativo (<dialog>: foco atrapado, Esc para cerrar) muestra las cuatro fotos.
@@ -16,61 +20,71 @@ export function WorkGallery() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
-  const edges = useRef({ prev: false, next: true });
+  const settleTimer = useRef<number | undefined>(undefined);
   const [carouselRef, inView] = useInView<HTMLDivElement>("100px");
   const [userPaused, setUserPaused] = useState(false);
   const [interacting, setInteracting] = useState(false);
+  const count = caseStudies.length;
 
-  const updateEdges = () => {
+  // Distancia entre dos portadas consecutivas y ancho de una copia completa.
+  const measure = () => {
     const track = trackRef.current;
-    if (!track) return;
-    const prev = track.scrollLeft > 4;
-    const next = track.scrollLeft + track.clientWidth < track.scrollWidth - 4;
-    if (prev !== edges.current.prev) {
-      edges.current.prev = prev;
-      setCanPrev(prev);
-    }
-    if (next !== edges.current.next) {
-      edges.current.next = next;
-      setCanNext(next);
+    const slides = track?.children;
+    if (!track || !slides || slides.length < count + 1) return null;
+    const first = slides[0] as HTMLElement;
+    const step = (slides[1] as HTMLElement).offsetLeft - first.offsetLeft;
+    const setWidth = (slides[count] as HTMLElement).offsetLeft - first.offsetLeft;
+    return { track, step, setWidth };
+  };
+
+  // Si se salió de la copia central, vuelve a la posición equivalente en ella.
+  const recenter = () => {
+    const m = measure();
+    if (!m) return;
+    const { track, setWidth } = m;
+    if (track.scrollLeft < setWidth * 0.5) {
+      track.scrollLeft += setWidth;
+    } else if (track.scrollLeft >= setWidth * 1.5) {
+      track.scrollLeft -= setWidth;
     }
   };
 
   useEffect(() => {
-    window.addEventListener("resize", updateEdges);
-    return () => window.removeEventListener("resize", updateEdges);
+    const start = () => {
+      const m = measure();
+      if (m) m.track.scrollLeft = m.setWidth;
+    };
+    start();
+    window.addEventListener("resize", start);
+    return () => {
+      window.removeEventListener("resize", start);
+      window.clearTimeout(settleTimer.current);
+    };
+    // measure solo lee el DOM; se mide de nuevo en cada resize.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Avance automático: se detiene con el mouse encima, al tocar, con un
-  // proyecto abierto, con el botón de pausa o si se pidió reducir el movimiento.
+  // Avance automático infinito: se detiene con el mouse encima, al tocar, con
+  // un proyecto abierto, con el botón de pausa o si se pidió reducir el movimiento.
   useEffect(() => {
     if (userPaused || interacting || !inView || active !== null) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const timer = window.setInterval(() => {
-      const track = trackRef.current;
-      const slide = track?.firstElementChild as HTMLElement | null;
-      if (!track || !slide) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-      track.scrollTo({
-        left: atEnd ? 0 : track.scrollLeft + slide.offsetWidth + 20,
-        behavior: "smooth"
-      });
+      const m = measure();
+      if (m) m.track.scrollBy({ left: m.step, behavior: "smooth" });
     }, AUTOPLAY_MS);
 
     return () => window.clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPaused, interacting, inView, active]);
 
   const scrollByCard = (direction: 1 | -1) => {
-    const track = trackRef.current;
-    const slide = track?.firstElementChild as HTMLElement | null;
-    if (!track || !slide) return;
+    const m = measure();
+    if (!m) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    track.scrollBy({
-      left: direction * (slide.offsetWidth + 20),
+    m.track.scrollBy({
+      left: direction * m.step,
       behavior: reduced ? "auto" : "smooth"
     });
   };
@@ -87,6 +101,10 @@ export function WorkGallery() {
       document.body.style.overflow = previousOverflow;
     };
   }, [active]);
+
+  const slides = Array.from({ length: COPIES }, (_, copy) =>
+    caseStudies.map((study, index) => ({ study, index, copy }))
+  ).flat();
 
   return (
     <>
@@ -115,19 +133,17 @@ export function WorkGallery() {
         </button>
         <button
           type="button"
-          aria-label="Proyectos anteriores"
-          disabled={!canPrev}
+          aria-label="Proyecto anterior"
           onClick={() => scrollByCard(-1)}
-          className="h-11 w-11 cursor-pointer rounded-full border border-ink/25 leading-none text-ink transition-colors hover:border-ink disabled:cursor-default disabled:opacity-30 disabled:hover:border-ink/25"
+          className="h-11 w-11 cursor-pointer rounded-full border border-ink/25 leading-none text-ink transition-colors hover:border-ink"
         >
           ←
         </button>
         <button
           type="button"
-          aria-label="Proyectos siguientes"
-          disabled={!canNext}
+          aria-label="Proyecto siguiente"
           onClick={() => scrollByCard(1)}
-          className="h-11 w-11 cursor-pointer rounded-full border border-ink bg-ink leading-none text-cream transition-opacity disabled:cursor-default disabled:opacity-30"
+          className="h-11 w-11 cursor-pointer rounded-full border border-ink bg-ink leading-none text-cream transition-colors hover:bg-wine"
         >
           →
         </button>
@@ -135,49 +151,60 @@ export function WorkGallery() {
 
       <div
         ref={trackRef}
-        onScroll={updateEdges}
+        onScroll={() => {
+          // Se recoloca cuando el desplazamiento se detiene, para no cortar
+          // la animación ni el gesto con el dedo.
+          window.clearTimeout(settleTimer.current);
+          settleTimer.current = window.setTimeout(recenter, 140);
+        }}
         role="group"
         aria-roledescription="carrusel"
         aria-label="Proyectos"
         className="-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:-mx-12 md:scroll-px-12 md:px-12 [&::-webkit-scrollbar]:hidden"
       >
-        {caseStudies.map((study, index) => (
+        {slides.map(({ study, index, copy }) => {
+          // Solo la copia central es accesible; las otras son repeticiones visuales.
+          const clone = copy !== 1;
+          return (
           <button
-            key={study.title}
+            key={`${copy}-${study.title}`}
             type="button"
             onClick={(event) => {
               triggerRef.current = event.currentTarget;
               setActive(index);
             }}
+            aria-hidden={clone || undefined}
+            tabIndex={clone ? -1 : undefined}
             aria-haspopup="dialog"
             aria-label={`Ver el proyecto ${study.title}`}
             className="group block w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-[33%] cursor-pointer text-left"
           >
-            <span className="relative block aspect-video overflow-hidden bg-[var(--beige-deep)]">
+            <span className="relative block aspect-video overflow-hidden rounded-xl bg-[var(--beige-deep)]">
               <Image
                 src={study.cover ?? study.images[0].src}
-                alt={study.images[0].alt}
+                alt={clone ? "" : study.images[0].alt}
                 fill
                 sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-[1.03]"
+                className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-[1.06]"
               />
               <span
                 aria-hidden="true"
-                className="editorial-eyebrow absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 text-ink opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100"
+                className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 font-display text-sm text-ink opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100"
               >
                 Ver proyecto +
               </span>
             </span>
             <span className="mt-4 flex flex-col gap-1">
-              <span className="editorial-eyebrow text-ink">
-                {String(index + 1).padStart(2, "0")} — {study.title}
+              <span className="font-display text-lg font-medium tracking-[-0.01em] text-ink">
+                {study.title}
               </span>
-              <span className="editorial-eyebrow text-ink-soft">
+              <span className="font-display text-sm font-light text-ink-soft">
                 {study.service}
               </span>
             </span>
           </button>
-        ))}
+          );
+        })}
       </div>
       </div>
 

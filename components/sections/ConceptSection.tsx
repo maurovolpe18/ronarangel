@@ -4,10 +4,10 @@ export function ConceptSection() {
   return (
     <section
       id="concepto"
-      className="flex min-h-[70vh] items-center bg-[#fffeea] px-6 py-24 md:h-screen md:min-h-[36rem] md:py-0 md:pl-[14.2vw] md:pr-12"
+      className="flex items-center bg-paper px-6 py-20 md:min-h-[72vh] md:py-24 md:pl-[14.2vw] md:pr-12"
     >
-      <Reveal className="w-full md:translate-y-[4.5vh]">
-        <h2 className="font-display text-[9vw] font-normal leading-[1.08] tracking-[-0.04em] text-[#5e2129] md:text-[4.72vw] md:leading-[1.19]">
+      <Reveal className="w-full">
+        <h2 className="font-display text-title font-normal leading-[1.12] tracking-[-0.04em] text-[#5e2129]">
           Detrás de cada proyecto{" "}
           <span className="font-semibold">
             hay
@@ -16,7 +16,7 @@ export function ConceptSection() {
           </span>
         </h2>
         {/* Siempre en dos líneas: cada una sin cortes, con el tamaño ligado al ancho. */}
-        <p className="mt-8 font-display text-[3.55vw] font-light leading-snug tracking-[-0.02em] text-black md:mt-[2.6vw] md:text-[2.3vw] md:leading-[1.3]">
+        <p className="mt-8 font-display text-[3.55vw] font-light leading-snug tracking-[-0.02em] text-black md:mt-8 md:text-lead">
           <span className="block whitespace-nowrap">
             Me gusta entender qué lo hace diferente y encontrar
           </span>

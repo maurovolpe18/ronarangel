@@ -55,7 +55,7 @@ export function DisciplineAccordion() {
             <h3>
               <button
                 type="button"
-                className="group grid w-full cursor-pointer grid-cols-12 items-center gap-4 py-8 text-left md:gap-8 md:py-10"
+                className="group grid w-full cursor-pointer grid-cols-12 items-center gap-4 py-6 text-left md:gap-8 md:py-7"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onPointerDown={(event) => {
@@ -79,15 +79,15 @@ export function DisciplineAccordion() {
                 }}
               >
                 <span className="col-span-3 md:col-span-2">
-                  <span className="display-mag text-5xl leading-none text-ink tabular-nums md:text-7xl lg:text-8xl">
+                  <span className="font-display text-number font-extralight tracking-[-0.03em] text-ink tabular-nums">
                     {discipline.number}
                   </span>
                 </span>
                 <span className="col-span-7 md:col-span-8">
-                  <span className="editorial-eyebrow mb-2 block text-wine md:mb-3">
+                  <span className="mb-1 block font-display text-sm font-light italic text-wine">
                     {discipline.word}
                   </span>
-                  <span className="display-mag block text-4xl font-semibold leading-[0.95] text-ink md:text-6xl lg:text-7xl">
+                  <span className="block font-display text-subtitle font-semibold tracking-[-0.035em] text-ink">
                     {discipline.title}
                   </span>
                 </span>
@@ -119,15 +119,15 @@ export function DisciplineAccordion() {
               }`}
             >
               <div className="overflow-hidden" inert={!isOpen}>
-                <div className="grid grid-cols-12 gap-4 pb-10 md:gap-8 md:pb-14">
+                <div className="grid grid-cols-12 gap-4 pb-8 md:gap-8 md:pb-10">
                   <div className="col-span-12 md:col-start-3 md:col-span-8">
-                    <p className="max-w-2xl text-base font-light leading-relaxed text-ink-soft md:text-lg">
+                    <p className="max-w-2xl font-display text-lead font-light text-ink-soft">
                       {discipline.copy}
                     </p>
                     {href ? (
                       <a
                         href={href}
-                        className="editorial-eyebrow mt-6 inline-flex items-center gap-3 text-ink transition-colors hover:text-wine"
+                        className="link-underline mt-5 inline-flex items-center gap-3 font-display text-base text-ink transition-colors hover:text-wine"
                       >
                         Ver proyectos
                         <span aria-hidden="true">→</span>
@@ -136,7 +136,7 @@ export function DisciplineAccordion() {
                       disciplinesWithWork.has(discipline.id) && (
                         <a
                           href="#trabajos"
-                          className="editorial-eyebrow mt-6 inline-flex items-center gap-3 text-ink transition-colors hover:text-wine"
+                          className="link-underline mt-5 inline-flex items-center gap-3 font-display text-base text-ink transition-colors hover:text-wine"
                         >
                           Ver trabajos
                           <span aria-hidden="true">→</span>

@@ -48,13 +48,13 @@ export function ProcessTimeline() {
                 transitionDelay: step.delay
               }}
             />
-            <div className="font-display text-[18vw] font-bold leading-none tracking-[-0.03em] text-white md:text-[6.4vw]">
+            <div className="font-display text-number font-bold tracking-[-0.03em] text-white">
               {step.number}
             </div>
-            <h3 className="mt-4 font-display text-3xl font-semibold tracking-[-0.02em] text-white md:mt-6 md:text-[2.3vw]">
+            <h3 className="mt-3 font-display text-subtitle font-semibold tracking-[-0.02em] text-white md:mt-4">
               {step.title}
             </h3>
-            <p className="mt-5 max-w-[19rem] font-display text-lg font-light leading-snug text-white/90 md:text-[1.45vw]">
+            <p className="mt-4 max-w-[19rem] font-display text-base font-light leading-relaxed text-white/90">
               {step.copy}
             </p>
           </div>

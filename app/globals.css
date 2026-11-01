@@ -10,12 +10,23 @@
   --color-wine: var(--wine);
   --color-rust: var(--rust);
   --color-peach: var(--peach);
+  --color-paper: var(--paper);
   --color-border: var(--border);
   --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-body:
-    var(--font-montserrat), var(--font-inter), ui-sans-serif, system-ui,
-    sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --tracking-editorial: 0.28em;
+
+  /* Escala tipográfica única para todo lo que no es el hero. */
+  --text-title: clamp(2.25rem, 4.4vw, 4rem);
+  --text-title--line-height: 1.02;
+  --text-subtitle: clamp(1.5rem, 2.1vw, 1.875rem);
+  --text-subtitle--line-height: 1.1;
+  --text-number: clamp(2.25rem, 3.4vw, 3rem);
+  --text-number--line-height: 1;
+  --text-lead: clamp(1.125rem, 1.5vw, 1.3rem);
+  --text-lead--line-height: 1.45;
+  --text-stat: clamp(4.5rem, 9vw, 8rem);
+  --text-stat--line-height: 0.85;
 }
 
 :root {
@@ -30,7 +41,9 @@
   /* Acentos cálidos para usar sobre fondos oscuros, donde el vino no contrasta. */
   --rust: #b54d25;
   --peach: #e8a87c;
-  --background: var(--cream);
+  /* Fondo claro de la maqueta; con el blanco son los dos únicos fondos claros. */
+  --paper: #fffeea;
+  --background: var(--paper);
   --foreground: var(--ink);
   --border: oklch(82% 0.025 75);
 }
@@ -78,9 +91,9 @@
   .editorial-eyebrow {
     color: var(--ink-soft);
     font-family: var(--font-body);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
@@ -122,6 +135,45 @@
     width: max-content;
   }
 
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    padding-bottom: 2px;
+    transition: background-size 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible,
+  .link-underline[aria-current="true"] {
+    background-size: 100% 1px;
+  }
+
+  /* Entrada del hero: cada línea sube desde una máscara. */
+  .hero-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.06em;
+  }
+
+  .hero-rise {
+    display: block;
+    animation: hero-rise 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .hero-fade {
+    animation: hero-fade 1200ms ease-out both;
+  }
+
+  .hero-from-left {
+    animation: hero-from-left 1300ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .hero-from-right {
+    animation: hero-from-right 1300ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
   .animate-gentle-float {
     animation: gentle-float 5s ease-in-out infinite;
   }
@@ -147,6 +199,33 @@
 @keyframes marquee {
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes hero-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-12vw);
+  }
+}
+
+@keyframes hero-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(12vw);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
   }
 }
 
@@ -216,8 +295,8 @@
   width: 100vw;
   height: 100dvh;
   padding: 7.5rem 1.5rem 2rem;
-  color: var(--ink);
-  background: var(--cream);
+  color: var(--cream);
+  background: var(--ink);
   visibility: hidden;
   opacity: 0;
   transform: translateY(-1rem);
@@ -238,19 +317,19 @@
 }
 
 .mobile-navigation nav {
-  border-top: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
+  border-top: 1px solid color-mix(in oklab, var(--cream) 18%, transparent);
 }
 
 .mobile-navigation nav a {
   display: grid;
-  grid-template-columns: 2rem 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: baseline;
   gap: 0.75rem;
   padding: 1.15rem 0;
-  border-bottom: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--cream) 18%, transparent);
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 10vw, 3.25rem);
-  font-weight: 300;
+  font-weight: 200;
   letter-spacing: -0.05em;
   line-height: 1;
 }
@@ -268,9 +347,10 @@
   justify-content: space-between;
   gap: 1rem;
   margin-top: 2rem;
-  padding: 1rem 1.15rem;
-  color: var(--cream);
-  background: var(--wine);
+  padding: 1rem 1.5rem;
+  color: var(--ink);
+  background: var(--cream);
+  border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -283,8 +363,8 @@
   gap: 0.5rem 1rem;
   margin-top: auto;
   padding-top: 2rem;
-  color: var(--ink-soft);
-  font-size: 0.58rem;
+  color: color-mix(in oklab, var(--cream) 60%, transparent);
+  font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -321,8 +401,16 @@
 
   .animate-gentle-float,
   .animate-marquee,
-  .animate-panel-in {
+  .animate-panel-in,
+  .hero-rise,
+  .hero-fade,
+  .hero-from-left,
+  .hero-from-right {
     animation: none;
+  }
+
+  .link-underline {
+    transition: none;
   }
 
   .reveal {

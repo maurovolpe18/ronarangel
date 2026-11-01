@@ -1,16 +1,18 @@
 import Image from "next/image";
+import { Reveal } from "@/components/Reveal";
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative overflow-hidden bg-white px-6 py-20 md:px-12 md:py-24">
-      <div className="relative mx-auto max-w-[84rem]">
-        {/* El titular queda por delante de la foto: "Rona" la cruza. */}
+    <section id="about" className="relative overflow-hidden bg-white px-6 py-16 md:px-12 md:py-20">
+      <Reveal className="relative mx-auto max-w-[84rem]">
+        {/* Como en la maqueta, este titular es una excepción a la escala común:
+            va enorme, por delante de la foto, que se mete bajo su base. */}
         <h2 className="relative z-10 text-center font-display text-[17vw] font-extralight leading-[0.85] tracking-[-0.05em] text-ink md:text-[12.8vw]">
           Hi, i´m <span className="font-normal">Rona</span>
         </h2>
 
         <div className="relative -mt-[6vw] grid grid-cols-12 md:-mt-[4.2vw]">
-          <p className="order-3 col-span-12 mt-8 font-display text-xl font-light leading-snug text-ink md:order-1 md:col-span-4 md:mt-0 md:self-end md:pr-6 md:text-right md:text-[1.75vw]">
+          <p className="order-3 col-span-12 mt-8 font-display text-lead font-light text-ink md:order-1 md:col-span-4 md:mt-0 md:self-end md:pr-6 md:text-right">
             Comunicadora, diseñadora
             <br />y directora creativa.
           </p>
@@ -25,7 +27,7 @@ export function AboutSection() {
             />
           </div>
 
-          <div className="relative z-10 order-2 col-span-12 -mt-10 mx-4 border border-ink bg-cream p-7 font-display text-lg font-light leading-snug text-ink md:order-3 md:col-span-4 md:mx-0 md:-ml-[6vw] md:mt-[9vw] md:self-start md:p-10 md:pr-8 md:text-[1.6vw] md:w-[calc(100%+6vw)]">
+          <div className="relative z-10 order-2 col-span-12 -mt-10 mx-4 border border-ink bg-cream p-7 font-display text-lead font-light text-ink md:order-3 md:col-span-4 md:mx-0 md:-ml-[6vw] md:mt-[9vw] md:self-start md:p-10 md:pr-8 md:w-[calc(100%+6vw)]">
             <p>
               Vengo del periodismo, de hacer preguntas, observar y contar
               historias. Con el tiempo encontré en el diseño otra manera de
@@ -38,7 +40,7 @@ export function AboutSection() {
             </p>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

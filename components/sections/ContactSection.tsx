@@ -1,4 +1,5 @@
 import { ContactForm } from "@/app/ContactForm";
+import { Reveal } from "@/components/Reveal";
 
 const links = [
   {
@@ -25,16 +26,17 @@ export function ContactSection() {
   return (
     <section
       id="contacto"
+      data-nav="dark"
       className="relative bg-ink px-6 py-20 text-cream md:px-12 md:py-16 lg:px-20"
     >
       <div className="grid grid-cols-12 items-center gap-y-12 md:gap-x-8">
-        <div className="col-span-12 md:col-span-6">
-          <h2 className="font-display text-[15vw] font-normal leading-[0.92] tracking-[-0.045em] text-cream md:text-[7.4vw]">
+        <Reveal className="col-span-12 md:col-span-6">
+          <h2 className="font-display text-title font-normal tracking-[-0.045em] text-cream">
             ¿Te gustaría
             <br />
             crear juntos?
           </h2>
-          <p className="mt-6 max-w-sm font-display text-lg font-light leading-snug tracking-[0.01em] text-cream md:text-[1.45vw]">
+          <p className="mt-6 max-w-sm font-display text-lead font-light text-cream">
             Cuéntame tu idea y conversemos sobre cómo podemos trabajar juntos.
           </p>
 
@@ -46,16 +48,16 @@ export function ContactSection() {
                 {...(link.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="group flex items-center justify-between gap-4 border-b border-cream/80 pb-4 pt-8 font-display text-lg font-light md:text-[1.45vw]"
+                className="group flex items-center justify-between gap-4 border-b border-cream/40 pb-4 pt-7 font-display text-lead font-light transition-colors hover:border-cream"
               >
                 <span>{link.label}</span>
-                <span className="truncate transition-opacity group-hover:opacity-70">
+                <span className="truncate transition-transform duration-300 group-hover:-translate-x-1">
                   {link.value}
                 </span>
               </a>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         <ContactForm />
       </div>

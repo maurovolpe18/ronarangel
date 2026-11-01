@@ -152,7 +152,7 @@ export function NewsletterPopup() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="newsletter-popup-title"
-      className="animate-panel-in fixed inset-x-4 bottom-4 z-40 bg-wine p-6 text-cream shadow-2xl shadow-black/30 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[25rem] md:p-8"
+      className="animate-panel-in fixed inset-x-4 bottom-4 z-40 rounded-3xl bg-wine p-6 text-cream shadow-2xl shadow-black/30 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[25rem] md:p-8"
     >
       <button
         type="button"
@@ -170,16 +170,12 @@ export function NewsletterPopup() {
         </svg>
       </button>
 
-      <div className="editorial-eyebrow mb-4 flex items-center gap-3 text-cream/75">
-        <span aria-hidden="true" className="h-px w-8 bg-cream/60" />
-        Newsletter
-      </div>
       <h2
         id="newsletter-popup-title"
-        className="display-mag pr-6 text-3xl leading-[0.95] text-cream md:text-4xl"
+        className="pr-8 font-display text-3xl font-extralight leading-[0.98] tracking-[-0.04em] text-cream md:text-4xl"
       >
-        Únete al club de{" "}
-        <span className="italic-accent text-peach">las almas creativas</span>
+        El Club de{" "}
+        <span className="font-semibold text-peach">las Almas Creativas</span>
       </h2>
 
       {submitted ? (
@@ -192,7 +188,8 @@ export function NewsletterPopup() {
       ) : (
         <>
           <p className="mt-4 text-sm font-light leading-relaxed text-cream/85">
-            Una carta semanal llena de ideas, reflexiones y hallazgos para nutrir tu creatividad, despertar tu curiosidad e inspirarte a mirar el mundo de otra manera.
+            De vez en cuando te enviaré una carta con algo de lo que he estado
+            viendo, leyendo, pensando o descubriendo.
           </p>
           <form onSubmit={handleSubmit} className="mt-6">
             <label htmlFor="newsletter-popup-email" className="sr-only">
@@ -211,9 +208,9 @@ export function NewsletterPopup() {
               <button
                 type="submit"
                 disabled={sending}
-                className="editorial-eyebrow h-12 w-full cursor-pointer rounded-full bg-cream px-4 text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
+                className="h-12 w-full cursor-pointer rounded-full bg-cream px-4 font-display text-base text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
               >
-                Quiero ser parte del club <span aria-hidden="true">🏹</span>
+                Quiero unirme al club. <span aria-hidden="true">🏹</span>
               </button>
             </div>
             <p

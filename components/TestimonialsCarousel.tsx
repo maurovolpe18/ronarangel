@@ -52,7 +52,7 @@ export function TestimonialsCarousel() {
   return (
     <section
       ref={sectionRef}
-      className="overflow-hidden bg-cream px-6 py-20 text-ink md:px-12 md:py-28"
+      className="overflow-hidden bg-paper px-6 py-16 text-ink md:px-12 md:py-24"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -61,11 +61,9 @@ export function TestimonialsCarousel() {
       aria-label="Testimonios"
     >
       <div className="mb-10 grid grid-cols-12 gap-4 md:mb-14">
-        <div className="col-span-12 md:col-span-8">
-          <div className="editorial-eyebrow mb-6 text-wine">Reseñas</div>
-          <h2 className="display-mag text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95]">
-            Algunas <span className="italic-accent">palabras</span>
-            <br />
+        <div className="col-span-12">
+          <h2 className="font-display text-title font-extralight tracking-[-0.045em] md:whitespace-nowrap">
+            Algunas <span className="font-semibold text-wine">palabras</span>{" "}
             sobre mi trabajo.
           </h2>
         </div>
@@ -88,17 +86,17 @@ export function TestimonialsCarousel() {
                   aria-hidden={!visible}
                 >
                   <article
-                    className={`flex h-full min-h-[300px] flex-col justify-between rounded-[4px] border border-ink/10 bg-cream p-8 transition-all duration-700 motion-reduce:transition-none md:p-10 ${
+                    className={`flex h-full min-h-[280px] flex-col justify-between rounded-2xl border border-ink/10 bg-white p-8 transition-all duration-700 motion-reduce:transition-none md:p-10 ${
                       visible ? "opacity-100" : "translate-y-2 opacity-35"
                     }`}
                   >
                     <div>
-                      <h3 className="display-mag mb-6 text-[clamp(1.6rem,2.4vw,2.2rem)] font-light leading-none tracking-[-0.03em]">
+                      <h3 className="mb-6 font-display text-subtitle font-light tracking-[-0.03em]">
                         &ldquo;
                         <span className="italic-accent">{testimonial.title}</span>
                         &rdquo;
                       </h3>
-                      <p className="text-[0.95rem] font-light leading-[1.7] text-ink/85">
+                      <p className="text-base font-light leading-relaxed text-ink/85">
                         {testimonial.quote}
                       </p>
                     </div>
@@ -108,10 +106,10 @@ export function TestimonialsCarousel() {
                         className="h-px w-[22px] shrink-0 bg-wine"
                       />
                       <div className="flex flex-col">
-                        <span className="editorial-eyebrow text-[0.7rem] text-ink">
+                        <span className="font-display text-sm font-medium text-ink">
                           {testimonial.name}
                         </span>
-                        <span className="font-display text-[0.72rem] font-light italic text-wine/85">
+                        <span className="font-display text-sm font-light italic text-wine/85">
                           {testimonial.role}
                         </span>
                       </div>
