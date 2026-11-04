@@ -9,23 +9,34 @@ const fieldClass =
 const labelClass = "block font-display text-lead font-light text-cream";
 
 export function ContactForm() {
-  const [opened, setOpened] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
 
-  // El sitio es estático: en lugar de simular un envío, se arma el correo con
-  // los datos del formulario y se abre en la aplicación de correo del visitante.
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  // Envía el mensaje a /api/contact (Worker de Cloudflare → Resend).
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "");
-    const email = String(data.get("email") ?? "");
-    const message = String(data.get("message") ?? "");
-    const subject = `Consulta desde la web — ${name}`;
-    const body = `${message}\n\n${name}\n${email}`;
+    if (status === "sending") return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    setOpened(true);
+    setStatus("sending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(data.get("name") ?? ""),
+          email: String(data.get("email") ?? ""),
+          message: String(data.get("message") ?? "")
+        })
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -74,14 +85,15 @@ export function ContactForm() {
       <div className="flex flex-col items-end gap-3 pt-4">
         <button
           type="submit"
-          className="w-full whitespace-nowrap rounded-full border border-cream/70 px-14 py-3 font-display text-lead font-light text-cream transition-colors hover:bg-cream hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream md:w-auto"
+          disabled={status === "sending"}
+          className="w-full whitespace-nowrap rounded-full border border-cream/70 px-14 py-3 font-display text-lead font-light text-cream transition-colors hover:bg-cream hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:opacity-60 md:w-auto"
         >
-          Enviar mensaje
+          {status === "sending" ? "Enviando…" : "Enviar mensaje"}
         </button>
-        <p className="text-right text-sm font-light leading-relaxed text-cream/60" aria-live="polite">
-          {opened
-            ? `Se abrió tu aplicación de correo. Si no aparece, escríbeme a ${CONTACT_EMAIL}.`
-            : "Se abrirá tu aplicación de correo con el mensaje listo."}
+        <p className="min-h-[1.5rem] text-right text-sm font-light leading-relaxed text-cream/60" aria-live="polite">
+          {status === "sent" && "¡Gracias! Recibí tu mensaje y te responderé pronto."}
+          {status === "error" &&
+            `No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbeme a ${CONTACT_EMAIL}.`}
         </p>
       </div>
     </form>

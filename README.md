@@ -164,8 +164,10 @@ guardado.
 
 ## Formulario
 
-Como el sitio es estático, el formulario no envía nada por sí mismo: al
-enviarlo arma un correo con los datos y lo abre en la aplicación de correo del
-visitante, dirigido a la dirección de `CONTACT_EMAIL` en `app/ContactForm.tsx`.
-Para recibir consultas sin depender de eso, habrá que conectarlo a un servicio
-de formularios o a un endpoint propio.
+El formulario (`app/ContactForm.tsx`) envía los datos a `POST /api/contact`,
+que atiende el Worker de `worker/index.ts` y reenvía el mensaje por correo con
+Resend a `CONTACT_TO`, usando el email del visitante como Reply-To. Usa la misma
+`RESEND_API_KEY` que la newsletter, pero la key necesita permiso de envío (*Full
+access* sirve) y el remitente `CONTACT_FROM` debe ser de un dominio verificado.
+`CONTACT_EMAIL` en el formulario solo se muestra como alternativa si falla el
+envío; si cambias la bandeja de destino, actualiza ambas constantes.
