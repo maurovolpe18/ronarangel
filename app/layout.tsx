@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Rona Rangel",
     locale: "es",
-    title: "Rona Rangel — Portafolio Editorial",
+    title: "Rona Rangel",
     description: "Diseño, fotografía y dirección creativa con propósito.",
     images: [
       {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rona Rangel — Portafolio Editorial",
+    title: "Rona Rangel",
     description: "Diseño, fotografía y dirección creativa con propósito.",
     images: ["/images/og.jpg"]
   }
