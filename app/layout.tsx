@@ -43,9 +43,26 @@ export const metadata: Metadata = {
   description:
     "Portafolio editorial de Rona Rangel. Construyo marcas desde la sensibilidad, la estética y la intención.",
   openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Rona Rangel",
+    locale: "es",
     title: "Rona Rangel — Portafolio Editorial",
     description: "Diseño, fotografía y dirección creativa con propósito.",
-    images: ["/images/hero-desktop.jpg"]
+    images: [
+      {
+        url: "/images/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Rona Rangel — Diseño, fotografía y dirección creativa"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rona Rangel — Portafolio Editorial",
+    description: "Diseño, fotografía y dirección creativa con propósito.",
+    images: ["/images/og.jpg"]
   }
 };
 

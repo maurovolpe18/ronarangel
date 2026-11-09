@@ -146,82 +146,90 @@ export function NewsletterPopup() {
 
   if (!open) return null;
 
+  // En móvil es un modal centrado sobre un fondo oscuro; desde sm, un panel en
+  // la esquina inferior derecha, sin fondo.
   return (
-    <div
-      ref={panelRef}
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby="newsletter-popup-title"
-      className="animate-panel-in fixed inset-x-4 bottom-4 z-40 rounded-3xl bg-wine p-6 text-cream shadow-2xl shadow-black/30 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[25rem] md:p-8"
-    >
-      <button
-        type="button"
-        aria-label="Cerrar"
-        onClick={closeWithButton}
-        className="absolute right-3 top-3 grid h-10 w-10 cursor-pointer place-items-center text-cream/70 transition-colors hover:text-cream focus-visible:outline-2 focus-visible:outline-cream"
+    <>
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 z-40 bg-black/60 sm:hidden"
+      />
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="newsletter-popup-title"
+        className="animate-panel-in fixed inset-x-4 top-1/2 z-50 max-h-[calc(100dvh-2rem)] -translate-y-1/2 overflow-y-auto rounded-3xl bg-wine p-6 text-cream shadow-2xl shadow-black/30 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:top-auto sm:w-[25rem] sm:translate-y-0 md:p-8"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path
-            d="M1 1L13 13M13 1L1 13"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="square"
-          />
-        </svg>
-      </button>
-
-      <h2
-        id="newsletter-popup-title"
-        className="pr-8 font-display text-3xl font-extralight leading-[0.98] tracking-[-0.04em] text-cream md:text-4xl"
-      >
-        El Club de{" "}
-        <span className="font-semibold text-peach">las Almas Creativas</span>
-      </h2>
-
-      {submitted ? (
-        <p
-          className="mt-5 text-sm font-light leading-relaxed text-cream/85"
-          aria-live="polite"
+        <button
+          type="button"
+          aria-label="Cerrar"
+          onClick={closeWithButton}
+          className="absolute right-3 top-3 grid h-10 w-10 cursor-pointer place-items-center text-cream/70 transition-colors hover:text-cream focus-visible:outline-2 focus-visible:outline-cream"
         >
-          {NEWSLETTER_SUCCESS_MESSAGE}
-        </p>
-      ) : (
-        <>
-          <p className="mt-4 text-sm font-light leading-relaxed text-cream/85">
-            De vez en cuando te enviaré una carta con algo de lo que he estado
-            viendo, leyendo, pensando o descubriendo.
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M1 1L13 13M13 1L1 13"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="square"
+            />
+          </svg>
+        </button>
+
+        <h2
+          id="newsletter-popup-title"
+          className="pr-8 font-display text-3xl font-extralight leading-[0.98] tracking-[-0.04em] text-cream md:text-4xl"
+        >
+          El Club de{" "}
+          <span className="font-semibold text-peach">las Almas Creativas</span>
+        </h2>
+
+        {submitted ? (
+          <p
+            className="mt-5 text-sm font-light leading-relaxed text-cream/85"
+            aria-live="polite"
+          >
+            {NEWSLETTER_SUCCESS_MESSAGE}
           </p>
-          <form onSubmit={handleSubmit} className="mt-6">
-            <label htmlFor="newsletter-popup-email" className="sr-only">
-              Tu email
-            </label>
-            <div className="flex flex-col gap-3">
-              <input
-                id="newsletter-popup-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                placeholder="Tu email"
-                className="h-12 w-full min-w-0 rounded-full border border-cream/50 bg-transparent px-5 font-light text-cream transition-colors placeholder:text-cream/55 focus:border-cream focus:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={sending}
-                className="h-12 w-full cursor-pointer rounded-full bg-cream px-4 font-display text-base text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
-              >
-                Quiero unirme al club. <span aria-hidden="true">🏹</span>
-              </button>
-            </div>
-            <p
-              className="mt-3 min-h-[1.25rem] text-sm font-light leading-relaxed text-cream/80"
-              aria-live="polite"
-            >
-              {error}
+        ) : (
+          <>
+            <p className="mt-4 text-sm font-light leading-relaxed text-cream/85">
+              De vez en cuando te enviaré una carta con algo de lo que he estado
+              viendo, leyendo, pensando o descubriendo.
             </p>
-          </form>
-        </>
-      )}
-    </div>
+            <form onSubmit={handleSubmit} className="mt-6">
+              <label htmlFor="newsletter-popup-email" className="sr-only">
+                Tu email
+              </label>
+              <div className="flex flex-col gap-3">
+                <input
+                  id="newsletter-popup-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  placeholder="Tu email"
+                  className="h-12 w-full min-w-0 rounded-full border border-cream/50 bg-transparent px-5 font-light text-cream transition-colors placeholder:text-cream/55 focus:border-cream focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="h-12 w-full cursor-pointer rounded-full bg-cream px-4 font-display text-base text-ink transition-colors hover:bg-peach focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream disabled:opacity-60"
+                >
+                  Quiero unirme al club. <span aria-hidden="true">🏹</span>
+                </button>
+              </div>
+              <p
+                className="mt-3 min-h-[1.25rem] text-sm font-light leading-relaxed text-cream/80"
+                aria-live="polite"
+              >
+                {error}
+              </p>
+            </form>
+          </>
+        )}
+      </div>
+    </>
   );
 }
